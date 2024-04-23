@@ -1,0 +1,54 @@
+.sidebar {
+  border-radius: 1rem;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  --webkit-backdrop-filter: blur(17px);
+  box-shadow: 6px 6px 20px -3px rgba(0, 0, 0, 0.573);
+}
+
+.sidebar .main-sidebar {
+  height: 100%;
+}
+
+.logo img {
+  width: 82px;
+  border-radius: 50%;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 1.35rem;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.lose-record {
+  color: black;
+  background-color: rgb(250, 89, 89);
+  padding: 0.25rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.win-record {
+  background-color: rgb(21, 219, 21);
+  width: 2rem;
+  color: black;
+  padding: 0.25rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+}
