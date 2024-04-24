@@ -1,54 +1,77 @@
-.sidebar {
-  border-radius: 1rem;
-  width: 260px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  --webkit-backdrop-filter: blur(17px);
-  box-shadow: 6px 6px 20px -3px rgba(0, 0, 0, 0.573);
-}
-
-.sidebar .main-sidebar {
+.menu {
+  width: 100%;
   height: 100%;
-}
-
-.logo img {
-  width: 82px;
-  border-radius: 50%;
-}
-
-.username {
-  font-weight: bold;
-  font-size: 1.35rem;
-}
-
-.title {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.lose-record {
-  color: black;
-  background-color: rgb(250, 89, 89);
-  padding: 0.25rem;
-  font-size: 1.125rem;
-  font-weight: bold;
-  border-radius: 0.25rem;
-  width: 2rem;
   display: flex;
-  justify-content: center;
-}
+  flex-direction: column;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  font-size: 1rem;
+  box-shadow: 4px 5px 25px -16px rgb(4, 29, 105);
 
-.win-record {
-  background-color: rgb(21, 219, 21);
-  width: 2rem;
-  color: black;
-  padding: 0.25rem;
-  font-size: 1.125rem;
-  font-weight: bold;
-  border-radius: 0.25rem;
-  display: flex;
-  justify-content: center;
+  .nav-header {
+    padding: 1rem 0;
+
+    .username {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .lose-record {
+      background-color: rgb(221, 30, 30);
+      padding: 0.25rem;
+      font-size: 1.125rem;
+      font-weight: bold;
+      border-radius: 0.25rem;
+      width: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .win-record {
+      background-color: rgb(41, 180, 41);
+      width: 2rem;
+      padding: 0.25rem;
+      font-size: 1.125rem;
+      font-weight: bold;
+      border-radius: 0.25rem;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .nav-main,
+  .nav-bottom {
+    padding: 1rem;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        font-size: 1rem;
+        cursor: pointer;
+        list-style-type: none;
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+
+        .pi {
+          font-size: 1.5rem;
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 1rem;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+          transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+      }
+    }
+  }
 }

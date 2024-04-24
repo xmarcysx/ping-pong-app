@@ -1,26 +1,34 @@
-<div class="flex flex-column gap-3">
-  <div class="sidebar">
-    <div class="logo">
-      <div class="flex flex-column justify-content-center">
-        <div class="p-3 flex justify-content-center">
-          <img src="../../../assets/images/logo.png" alt="logo" />
-        </div>
-        <p class="username">Nazwa użytkownika</p>
+<div class="menu">
+  <div class="nav-header">
+    <div class="flex flex-column justify-content-center">
+      <div class="p-3 flex justify-content-center">
+        <img width="100" src="../../../assets/images/profile.png" alt="logo" />
       </div>
+      <p class="username text-center">Username</p>
     </div>
-    <div>
-      <div class="flex flex-column justify-content-center pb-3">
-        <div class="title">Rekord</div>
-        <div class="flex justify-content-center align-items-center gap-1">
-          <div class="win-record"><span>13</span></div>
 
-          <div class="lose-record"><span>5</span></div>
-        </div>
+    <div class="flex flex-column justify-content-center pb-3">
+      <div class="flex justify-content-center align-items-center gap-1">
+        <div class="win-record"><span>13</span></div>
+        <div class="lose-record"><span>5</span></div>
       </div>
     </div>
   </div>
 
-  <div class="sidebar">Menu: Dashboard (zaznaczony), Historia meczy</div>
+  <div class="flex flex-column flex-grow-1 justify-content-between">
+    <div class="nav-main">
+      <ul>
+        <li><i class="pi pi-home"></i>Dashboard</li>
+        <li><i class="pi pi-bell"></i>Powiadomienia</li>
+        <li><i class="pi pi-history"></i>Historia spotkań</li>
+      </ul>
+    </div>
 
-  <div class="sidebar">Ustawienia Wyloguj</div>
+    <div class="nav-bottom">
+      <ul>
+        <li><i class="pi pi-cog"></i>Ustawienia</li>
+        <li><i class="pi pi-sign-out"></i>Wyloguj się</li>
+      </ul>
+    </div>
+  </div>
 </div>
