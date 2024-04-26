@@ -5,15 +5,25 @@ import { LoginForm } from '../../models/login-form';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormSubmitBtnComponent } from '../../../shared/form-submit-btn/form-submit-btn.component';
+import { RegistrationComponent } from '../registration/registration.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [InputTextModule, PasswordModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  imports: [
+    InputTextModule,
+    PasswordModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FormSubmitBtnComponent,
+    RegistrationComponent,
+  ],
 })
 export class LoginComponent implements OnInit {
+  isLoginForm = true;
   form!: FormGroup<LoginForm>;
 
   constructor(private _loginService: LoginService) {}

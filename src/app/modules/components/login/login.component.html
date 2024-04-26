@@ -1,3 +1,4 @@
+@if (isLoginForm) {
 <div class="form">
   <div class="form-content">
     <div class="blur-background">
@@ -6,13 +7,12 @@
         <div class="title">Logowanie</div>
       </div>
       <form
-        (submit)="save()"
         [formGroup]="form"
-        class="flex flex-column align-items-center gap-5 my-3 py-5"
+        class="flex flex-column align-items-center gap-5 my-3 pt-5"
       >
         <div class="flex flex-column w-50 f-control">
           <input
-            id="username"
+            id="login-username"
             type="text"
             pInputText
             class="f-control-input"
@@ -20,7 +20,7 @@
             autocomplete="off"
             placeholder=" "
           />
-          <label for="username" class="f-control-label"
+          <label for="login-username" class="f-control-label"
             >Nazwa użytkownika</label
           >
         </div>
@@ -35,31 +35,25 @@
           />
           <label for="password" class="f-control-label">Hasło</label>
         </div>
-        <div class="flex justify-content-center align-items-center">
-          <button type="submit" class="animated-button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="arr-2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
-              ></path>
-            </svg>
-            <span class="text">Zaloguj się</span>
-            <span class="circle"></span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="arr-1"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
-              ></path>
-            </svg>
-          </button>
-        </div>
       </form>
+      <div class="flex flex-column justify-content-center">
+        <div class="flex m-auto justify-content-between w-50">
+          <div class="cursor-pointer link-btn">Zapomniałem hasło</div>
+          <div (click)="isLoginForm = false" class="cursor-pointer link-btn">
+            Zarejestruj się
+          </div>
+        </div>
+        <div class="flex justify-content-center align-items-center py-5">
+          <app-form-submit-btn
+            title="Zaloguj się"
+            (btnClicked)="save()"
+          ></app-form-submit-btn>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+} @else {
+<app-registration (changeFormToLogin)="isLoginForm = true"></app-registration>
+}

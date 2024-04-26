@@ -1,1 +1,79 @@
-<p>registration works!</p>
+<div class="form">
+  <div class="form-content">
+    <div class="blur-background">
+      <div class="logo">
+        <img src="../../../../assets/images/logo.png" alt="logo" />
+        <div class="title">Rejestracja</div>
+      </div>
+      <form
+        [formGroup]="form"
+        class="flex flex-column align-items-center gap-5 my-3 pt-5"
+      >
+        <div class="flex flex-column w-50 f-control">
+          <input
+            id="username"
+            type="text"
+            pInputText
+            class="f-control-input"
+            formControlName="username"
+            autocomplete="off"
+            placeholder=" "
+          />
+          <label for="username" class="f-control-label"
+            >Nazwa użytkownika</label
+          >
+        </div>
+        <div class="flex flex-column w-50 f-control">
+          <input
+            id="email"
+            type="text"
+            pInputText
+            class="f-control-input"
+            formControlName="email"
+            autocomplete="off"
+            placeholder=" "
+          />
+          <label for="email" class="f-control-label">E-mail</label>
+        </div>
+        <div class="flex flex-column w-50 f-control">
+          <input
+            type="password"
+            class="f-control-input"
+            pInputText
+            formControlName="password"
+            autocomplete="off"
+            placeholder=" "
+          />
+          <label for="password" class="f-control-label">Hasło</label>
+        </div>
+        <div class="flex flex-column w-50 f-control">
+          <input
+            type="password"
+            class="f-control-input"
+            pInputText
+            formControlName="passwordRepeat"
+            autocomplete="off"
+            placeholder=" "
+          />
+          <label for="passwordRepeat" class="f-control-label">Hasło</label>
+        </div>
+      </form>
+      <div class="flex flex-column justify-content-center">
+        <div class="flex m-auto justify-content-between w-50">
+          <div
+            (click)="this.changeFormToLogin.emit(true)"
+            class="cursor-pointer link-btn"
+          >
+            Zaloguj się
+          </div>
+        </div>
+        <div class="flex justify-content-center align-items-center py-5">
+          <app-form-submit-btn
+            title="Zarejestruj się"
+            (btnClicked)="save()"
+          ></app-form-submit-btn>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
