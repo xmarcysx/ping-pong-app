@@ -1,0 +1,65 @@
+<div class="form">
+  <div class="form-content">
+    <div class="blur-background">
+      <div class="logo">
+        <img src="../../../../assets/images/logo.png" alt="logo" />
+        <div class="title">Logowanie</div>
+      </div>
+      <form
+        (submit)="save()"
+        [formGroup]="form"
+        class="flex flex-column align-items-center gap-5 my-3 py-5"
+      >
+        <div class="flex flex-column w-50 f-control">
+          <input
+            id="username"
+            type="text"
+            pInputText
+            class="f-control-input"
+            formControlName="username"
+            autocomplete="off"
+            placeholder=" "
+          />
+          <label for="username" class="f-control-label"
+            >Nazwa użytkownika</label
+          >
+        </div>
+        <div class="flex flex-column w-50 f-control">
+          <input
+            type="password"
+            class="f-control-input"
+            pInputText
+            formControlName="password"
+            autocomplete="off"
+            placeholder=" "
+          />
+          <label for="password" class="f-control-label">Hasło</label>
+        </div>
+        <div class="flex justify-content-center align-items-center">
+          <button type="submit" class="animated-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="arr-2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
+            <span class="text">Zaloguj się</span>
+            <span class="circle"></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="arr-1"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
@@ -15,4 +17,33 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   color: white;
+  font-family: "Poppins";
+}
+
+.blur-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 5px 25px -16px rgba(255, 255, 255, 0.4);
+}
+
+.p-inputtext {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 1rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  border-color: transparent;
+  font-size: 0.85rem;
+  color: white;
+  width: 100%;
+
+  &:enabled:focus {
+    border-color: white;
+  }
 }
