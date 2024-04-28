@@ -3,6 +3,7 @@ import { FormSubmitBtnComponent } from '../../../shared/form-submit-btn/form-sub
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationForm } from '../../models/registration-form';
 import { RegistrationService } from '../../services/registration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -20,10 +21,17 @@ export class RegistrationComponent implements OnInit {
 
   form!: FormGroup<RegistrationForm>;
 
-  constructor(private _registrationService: RegistrationService) {}
+  constructor(
+    private _registrationService: RegistrationService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = this._registrationService.getForm();
+  }
+
+  navigateToLogin() {
+    this._router.navigateByUrl('/logowanie');
   }
 
   save() {

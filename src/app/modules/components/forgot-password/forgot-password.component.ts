@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login.service';
 import { FormGroup } from '@angular/forms';
-import { LoginForm } from '../../models/login-form';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormSubmitBtnComponent } from '../../../shared/form-submit-btn/form-submit-btn.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { Router } from '@angular/router';
+import { ForgotPasswordForm } from '../../models/forgot-password-form';
+import { ForgotPasswordService } from '../../services/forgot-password.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-forgot-password',
   standalone: true,
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.scss',
   imports: [
     InputTextModule,
     PasswordModule,
@@ -23,21 +23,20 @@ import { Router } from '@angular/router';
     RegistrationComponent,
   ],
 })
-export class LoginComponent implements OnInit {
-  form!: FormGroup<LoginForm>;
+export class ForgotPassword implements OnInit {
+  form!: FormGroup<ForgotPasswordForm>;
 
-  constructor(private _loginService: LoginService, private _router: Router) {}
+  constructor(
+    private _forgotPasswordService: ForgotPasswordService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.form = this._loginService.getForm();
+    this.form = this._forgotPasswordService.getForm();
   }
 
-  navigateToRegistration() {
-    this._router.navigateByUrl('/rejestracja');
-  }
-
-  navigateToForgotPassword() {
-    this._router.navigateByUrl('/przypomnij-hasło');
+  navigateToLogin() {
+    this._router.navigateByUrl('/logowanie');
   }
 
   save() {

@@ -60,11 +60,11 @@
       </form>
       <div class="flex flex-column justify-content-center">
         <div class="flex m-auto justify-content-between w-50">
-          <div
-            (click)="this.changeFormToLogin.emit(true)"
-            class="cursor-pointer link-btn"
-          >
-            Zaloguj się
+          <div (click)="navigateToLogin()">
+            Posiadam już konto
+            <span class="link-btn cursor-pointer font-weight-bold"
+              >Zaloguj się</span
+            >
           </div>
         </div>
         <div class="flex justify-content-center align-items-center py-5">
