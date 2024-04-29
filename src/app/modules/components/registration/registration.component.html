@@ -7,7 +7,7 @@
       </div>
       <form
         [formGroup]="form"
-        class="flex flex-column align-items-center gap-5 my-3 pt-5"
+        class="flex flex-column align-items-center gap-5 pt-5"
       >
         <div class="flex flex-column w-50 f-control">
           <input
@@ -60,9 +60,11 @@
       </form>
       <div class="flex flex-column justify-content-center">
         <div class="flex m-auto justify-content-between w-50">
-          <div (click)="navigateToLogin()">
+          <div>
             Posiadam już konto
-            <span class="link-btn cursor-pointer font-weight-bold"
+            <span
+              (click)="navigateToLogin()"
+              class="link-btn cursor-pointer font-weight-bold"
               >Zaloguj się</span
             >
           </div>

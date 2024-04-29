@@ -1,0 +1,24 @@
+<div class="matches-content">
+  <div class="header">
+    <div class="title">Historia spotkań</div>
+    <div class="logo">
+      <img src="../../../../assets/images/logo.png" alt="logo" />
+    </div>
+  </div>
+
+  <div class="content py-3">
+    <div class="my-3 w-100 flex justify-content-center">
+      <div class="dropdown w-50">
+        <p-dropdown
+          [showClear]="true"
+          placeholder="Wybierz przeciwnika"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <div class="match-list">
+      <app-match></app-match>
+      <app-match></app-match>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .match-win {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    border: 1px solid rgb(41, 180, 41);
+    //   border: 1px solid rgb(221, 30, 30);
+    border-radius: 1.5rem;
+    background: rgba(41, 180, 41, 0.25);
+    //   background: rgba(221, 30, 30, 0.25);
+
+    .player {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      .player-logo {
+        width: 10%;
+        img {
+          width: 100%;
+        }
+      }
+
+      .player-name {
+        text-align: center;
+        width: 80%;
+      }
+    }
+
+    .result {
+      padding: 0.25rem;
+      .lose-record {
+        background-color: rgb(221, 30, 30);
+        padding: 0.25rem;
+        font-size: 1.125rem;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        width: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .win-record {
+        background-color: rgb(41, 180, 41);
+        width: 2rem;
+        padding: 0.25rem;
+        font-size: 1.125rem;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
+  .match-lose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    border: 1px solid rgb(221, 30, 30);
+    border-radius: 1.5rem;
+    background: rgba(221, 30, 30, 0.25);
+
+    .player {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      .player-logo {
+        width: 10%;
+        img {
+          width: 100%;
+        }
+      }
+
+      .player-name {
+        text-align: center;
+        width: 80%;
+      }
+    }
+
+    .result {
+      padding: 0.25rem;
+      .lose-record {
+        background-color: rgb(221, 30, 30);
+        padding: 0.25rem;
+        font-size: 1.125rem;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        width: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .win-record {
+        background-color: rgb(41, 180, 41);
+        width: 2rem;
+        padding: 0.25rem;
+        font-size: 1.125rem;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}

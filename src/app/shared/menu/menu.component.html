@@ -18,9 +18,16 @@
   <div class="flex flex-column flex-grow-1 justify-content-between">
     <div class="nav-main">
       <ul>
-        <li><i class="pi pi-home"></i>Dashboard</li>
+        <li [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+          <i class="pi pi-home"></i>Dashboard
+        </li>
+        <li
+          [routerLink]="['/historia-spotkań']"
+          routerLinkActive="router-link-active"
+        >
+          <i class="pi pi-history"></i>Historia spotkań
+        </li>
         <li><i class="pi pi-bell"></i>Powiadomienia</li>
-        <li><i class="pi pi-history"></i>Historia spotkań</li>
       </ul>
     </div>
 

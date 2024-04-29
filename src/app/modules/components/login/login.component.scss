@@ -18,12 +18,12 @@
         align-items: center;
 
         img {
-          width: 25%;
+          width: 15%;
         }
 
         .title {
           font-weight: bold;
-          font-size: 2rem;
+          font-size: 1.5rem;
         }
       }
 
@@ -76,6 +76,6 @@
 .f-control-input:not(:placeholder-shown).f-control-input:not(:focus)
   ~ .f-control-label {
   top: -1.5rem;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   left: -0.5rem;
 }
