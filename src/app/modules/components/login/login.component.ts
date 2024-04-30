@@ -41,6 +41,18 @@ export class LoginComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.value);
+    if (this.form.valid) {
+      const fValue = this.form.getRawValue();
+      this._loginService.login(fValue.email, fValue.password).subscribe({
+        next: () => {
+          this._router.navigateByUrl('/dashboard');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 }

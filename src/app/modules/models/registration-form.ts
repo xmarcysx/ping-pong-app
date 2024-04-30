@@ -6,3 +6,10 @@ export interface RegistrationForm {
   password: FormControl;
   passwordRepeat: FormControl;
 }
+
+export interface RegistrationFormValue {
+  username: string;
+  email: string;
+  password: string;
+  passwordRepeat: string;
+}

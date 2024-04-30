@@ -11,16 +11,16 @@
       >
         <div class="flex flex-column w-50 f-control">
           <input
-            id="login-username"
+            id="login-email"
             type="text"
             pInputText
             class="f-control-input"
-            formControlName="username"
+            [formControl]="form.controls.email"
             autocomplete="off"
             placeholder=" "
           />
-          <label for="login-username" class="f-control-label"
-            >Nazwa użytkownika</label
+          <label for="login-email" class="f-control-label required"
+            >Email</label
           >
         </div>
         <div class="flex flex-column w-50 f-control">
@@ -28,11 +28,11 @@
             type="password"
             class="f-control-input"
             pInputText
-            formControlName="password"
+            [formControl]="form.controls.password"
             autocomplete="off"
             placeholder=" "
           />
-          <label for="password" class="f-control-label">Hasło</label>
+          <label for="password" class="f-control-label required">Hasło</label>
         </div>
       </form>
       <div class="flex flex-column justify-content-center">

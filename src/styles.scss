@@ -76,3 +76,8 @@ body {
     font-size: 0.9rem;
   }
 }
+
+input.ng-invalid.ng-touched {
+  border: 1px solid rgb(221, 30, 30);
+  background: rgba(221, 30, 30, 0.25);
+}

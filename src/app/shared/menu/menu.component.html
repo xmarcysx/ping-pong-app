@@ -2,9 +2,19 @@
   <div class="nav-header">
     <div class="flex flex-column justify-content-center">
       <div class="p-3 flex justify-content-center">
-        <img width="100" src="../../../assets/images/profile.png" alt="logo" />
+        <img
+          width="100"
+          [src]="
+            authService.currentUser()?.profileImg === null
+              ? '../../../assets/images/profile.png'
+              : authService.currentUser()?.profileImg
+          "
+          alt="logo"
+        />
       </div>
-      <p class="username text-center">Username</p>
+      <p class="username text-center">
+        {{ authService.currentUser()?.username }}
+      </p>
     </div>
 
     <div class="flex flex-column justify-content-center pb-3">

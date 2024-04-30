@@ -8,6 +8,7 @@ import { RegistrationComponent } from '../registration/registration.component';
 import { Router } from '@angular/router';
 import { ForgotPasswordForm } from '../../models/forgot-password-form';
 import { ForgotPasswordService } from '../../services/forgot-password.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -28,6 +29,7 @@ export class ForgotPassword implements OnInit {
 
   constructor(
     private _forgotPasswordService: ForgotPasswordService,
+    private _toastService: ToastService,
     private _router: Router
   ) {}
 
@@ -40,6 +42,21 @@ export class ForgotPassword implements OnInit {
   }
 
   save() {
-    console.log(this.form.value);
+    if (this.form.valid) {
+      const email = this.form.getRawValue().email;
+      this._forgotPasswordService.resetPassword(email).subscribe({
+        next: () => {
+          this._router.navigateByUrl('/logowanie');
+          this._toastService.success(
+            'Email z linkiem do zresetowania hasła został wysłany'
+          );
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 }

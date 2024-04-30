@@ -15,11 +15,11 @@
             type="text"
             pInputText
             class="f-control-input"
-            formControlName="username"
+            [formControl]="this.form.controls.username"
             autocomplete="off"
             placeholder=" "
           />
-          <label for="username" class="f-control-label"
+          <label for="username" class="f-control-label required"
             >Nazwa użytkownika</label
           >
         </div>
@@ -29,33 +29,35 @@
             type="text"
             pInputText
             class="f-control-input"
-            formControlName="email"
+            [formControl]="this.form.controls.email"
             autocomplete="off"
             placeholder=" "
           />
-          <label for="email" class="f-control-label">E-mail</label>
+          <label for="email" class="f-control-label required">E-mail</label>
         </div>
         <div class="flex flex-column w-50 f-control">
           <input
             type="password"
             class="f-control-input"
             pInputText
-            formControlName="password"
+            [formControl]="this.form.controls.password"
             autocomplete="off"
             placeholder=" "
           />
-          <label for="password" class="f-control-label">Hasło</label>
+          <label for="password" class="f-control-label required">Hasło</label>
         </div>
         <div class="flex flex-column w-50 f-control">
           <input
             type="password"
             class="f-control-input"
             pInputText
-            formControlName="passwordRepeat"
+            [formControl]="this.form.controls.passwordRepeat"
             autocomplete="off"
             placeholder=" "
           />
-          <label for="passwordRepeat" class="f-control-label">Hasło</label>
+          <label for="passwordRepeat" class="f-control-label required"
+            >Hasło</label
+          >
         </div>
       </form>
       <div class="flex flex-column justify-content-center">
