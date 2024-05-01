@@ -85,3 +85,26 @@ input.ng-invalid.ng-touched {
 ul {
   padding-left: 0;
 }
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background: rgb(255, 197, 197);
+}
+
+.p-toast .p-toast-message.p-toast-message-success {
+  background: rgb(197, 255, 197);
+}
+
+.p-dialog .p-dialog-header .p-dialog-title {
+  font-size: 1.5rem !important;
+  color: white;
+}
+
+.p-dialog .p-dialog-content {
+  backdrop-filter: blur(1rem);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.p-dialog .p-dialog-header {
+  backdrop-filter: blur(1rem);
+  background-color: rgba(0, 0, 0, 0.5);
+}

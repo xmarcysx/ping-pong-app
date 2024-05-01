@@ -8,6 +8,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyBnFDVY292hPJ-J63CFROOSRWuGc6M3IAs',
@@ -30,5 +31,6 @@ export const appConfig: ApplicationConfig = {
       BrowserAnimationsModule,
     ]),
     MessageService,
+    DialogService,
   ],
 };

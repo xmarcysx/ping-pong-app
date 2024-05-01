@@ -9,7 +9,10 @@
   <div class="content py-3">
     <div class="row py-5">
       <div class="col-lg-12 d-flex justify-content-center">
-        <app-form-submit-btn title="Dodaj nowy wynik"></app-form-submit-btn>
+        <app-form-submit-btn
+          (btnClicked)="openAddMatchDialog()"
+          title="Dodaj nowy wynik"
+        ></app-form-submit-btn>
       </div>
     </div>
     <div class="row py-5">

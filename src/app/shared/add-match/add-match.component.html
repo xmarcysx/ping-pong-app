@@ -1,0 +1,58 @@
+<div class="main pt-3">
+  <div class="content">
+    <div class="rival">
+      <p-dropdown
+        [options]="rivalList"
+        [(ngModel)]="rival"
+        [showClear]="true"
+        placeholder="Wybierz przeciwnika"
+      >
+        <ng-template pTemplate="selectedItem">
+          <div class="flex align-items-center gap-2">
+            <img
+              [src]="
+                rival?.profileImg === undefined
+                  ? '../../../../assets/images/profile.png'
+                  : rival?.profileImg
+              "
+              style="width: 18px"
+            />
+            <div>{{ rival?.username }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-rival pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <img
+              [src]="
+                rival.profileImg === undefined
+                  ? '../../../../assets/images/profile.png'
+                  : rival.profileImg
+              "
+              style="width: 18px"
+            />
+            <div>{{ rival.username }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="result">
+      <div class="your-resut">
+        <p-dropdown
+          [options]="scoreList"
+          [showClear]="true"
+          placeholder="Twój rezultat"
+        >
+        </p-dropdown>
+      </div>
+      <span>:</span>
+      <div class="rival-resut">
+        <p-dropdown
+          [options]="scoreList"
+          [showClear]="true"
+          placeholder="Rezultat przeciwnika"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+</div>

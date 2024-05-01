@@ -30,7 +30,6 @@ export class MatchesHistoryComponent implements OnInit {
     const currentUserUid = this._authService.currentUser()?.uid;
     this._getFromFirebase.getRivalsList(currentUserUid).subscribe((res) => {
       this.rivalList = res;
-      console.log(res);
     });
   }
 }
