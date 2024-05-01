@@ -7,10 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable, from } from 'rxjs';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  constructor(private _authService: Auth) {}
+  constructor(
+    private _authService: Auth,
+    private _spinnerService: SpinnerService
+  ) {}
 
   getForm() {
     return new FormGroup({
@@ -20,6 +24,7 @@ export class LoginService {
   }
 
   login(email: string, password: string): Observable<void> {
+    this._spinnerService.toTrue();
     const promise = signInWithEmailAndPassword(
       this._authService,
       email,

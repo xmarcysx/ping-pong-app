@@ -16,6 +16,7 @@ export const firebaseConfig = {
   storageBucket: 'pingpongapp-7b948.appspot.com',
   messagingSenderId: '374079902293',
   appId: '1:374079902293:web:0bd1ad56681324f9af7adc',
+  databaseURL: 'https://pingpongapp-7b948-default-rtdb.firebaseio.com',
 };
 
 export const appConfig: ApplicationConfig = {

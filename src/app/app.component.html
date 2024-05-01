@@ -1,1 +1,6 @@
-<router-outlet></router-outlet> <p-toast></p-toast>
+<p-toast></p-toast>
+@if (spinnerService.showSpinner()) {
+<app-racket-animation></app-racket-animation>
+} @else {
+<router-outlet></router-outlet>
+}

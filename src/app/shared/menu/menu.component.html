@@ -5,7 +5,7 @@
         <img
           width="100"
           [src]="
-            authService.currentUser()?.profileImg === null
+            authService.currentUser()?.profileImg === undefined
               ? '../../../assets/images/profile.png'
               : authService.currentUser()?.profileImg
           "
@@ -19,8 +19,12 @@
 
     <div class="flex flex-column justify-content-center pb-3">
       <div class="flex justify-content-center align-items-center gap-1">
-        <div class="win-record"><span>13</span></div>
-        <div class="lose-record"><span>5</span></div>
+        <div class="win-record">
+          <span> {{ authService.currentUser()?.wins }} </span>
+        </div>
+        <div class="lose-record">
+          <span>{{ authService.currentUser()?.loses }}</span>
+        </div>
       </div>
     </div>
   </div>

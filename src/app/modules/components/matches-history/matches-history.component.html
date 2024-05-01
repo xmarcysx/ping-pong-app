@@ -10,9 +10,38 @@
     <div class="my-3 w-100 flex justify-content-center">
       <div class="dropdown w-50">
         <p-dropdown
+          [options]="rivalList"
+          [(ngModel)]="rival"
           [showClear]="true"
           placeholder="Wybierz przeciwnika"
-        ></p-dropdown>
+        >
+          <ng-template pTemplate="selectedItem">
+            <div class="flex align-items-center gap-2">
+              <img
+                [src]="
+                  rival?.profileImg === undefined
+                    ? '../../../../assets/images/profile.png'
+                    : rival?.profileImg
+                "
+                style="width: 18px"
+              />
+              <div>{{ rival?.username }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-rival pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <img
+                [src]="
+                  rival.profileImg === undefined
+                    ? '../../../../assets/images/profile.png'
+                    : rival.profileImg
+                "
+                style="width: 18px"
+              />
+              <div>{{ rival.username }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
       </div>
     </div>
 

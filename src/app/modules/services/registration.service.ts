@@ -6,12 +6,19 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { updateProfile } from 'firebase/auth';
+import { User, updateProfile } from 'firebase/auth';
 import { Observable, from } from 'rxjs';
+import { SpinnerService } from './spinner.service';
+import { HttpClient } from '@angular/common/http';
+import { firebaseConfig } from '../../app.config';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
-  constructor(private _authService: Auth) {}
+  constructor(
+    private _http: HttpClient,
+    private _authService: Auth,
+    private _spinnerService: SpinnerService
+  ) {}
 
   getForm() {
     return new FormGroup({
@@ -27,16 +34,31 @@ export class RegistrationService {
     username: string,
     password: string
   ): Observable<void> {
+    this._spinnerService.toTrue();
     const promise = createUserWithEmailAndPassword(
       this._authService,
       email,
       password
-    ).then((res) =>
+    ).then((res) => {
       updateProfile(res.user, {
         displayName: username,
         photoURL: null,
-      })
-    );
+      });
+      this._addUserToDatabase(res.user, username);
+    });
     return from(promise);
+  }
+
+  private _addUserToDatabase(user: User, username: string) {
+    this._http
+      .post(`${firebaseConfig.databaseURL}/users.json`, {
+        uid: user.uid,
+        email: user.email,
+        username: username,
+        photoURL: null,
+        loses: 0,
+        wins: 0,
+      })
+      .subscribe();
   }
 }
