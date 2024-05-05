@@ -37,21 +37,69 @@
     </div>
     <div class="result">
       <div class="your-resut">
-        <p-dropdown
-          [options]="scoreList"
-          [showClear]="true"
-          placeholder="Twój rezultat"
-        >
-        </p-dropdown>
+        <p-rating stars="3">
+          <ng-template pTemplate="cancelicon">
+            <img
+              src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+              width="25px"
+              height="25px"
+            />
+          </ng-template>
+          <ng-template pTemplate="onicon">
+            <img
+              src="../../../assets/images/ping-pong-ball-active.png"
+              width="25px"
+              height="25px"
+            />
+          </ng-template>
+          <ng-template pTemplate="officon">
+            <img
+              src="../../../assets/images/ping-pong-ball.png"
+              width="25px"
+              height="25px"
+            />
+          </ng-template>
+        </p-rating>
       </div>
       <span>:</span>
       <div class="rival-resut">
-        <p-dropdown
-          [options]="scoreList"
-          [showClear]="true"
-          placeholder="Rezultat przeciwnika"
-        >
-        </p-dropdown>
+        <p-rating stars="3">
+          <ng-template pTemplate="cancelicon">
+            <img
+              src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+              width="25px"
+              height="25px"
+            />
+          </ng-template>
+          <ng-template pTemplate="onicon">
+            <img
+              src="../../../assets/images/ping-pong-ball-active.png"
+              width="25px"
+              height="25px"
+            />
+          </ng-template>
+          <ng-template pTemplate="officon">
+            <img
+              src="../../../assets/images/ping-pong-ball.png"
+              width="25px"
+              height="25px"
+            />
+          </ng-template>
+        </p-rating>
+      </div>
+    </div>
+
+    <div class="preview">
+      <!-- <div class="win-record"><span>Zwycięstwo</span></div> -->
+      <div class="lose-record"><span>Porażka</span></div>
+    </div>
+
+    <div class="flex flex-column justify-content-center">
+      <div class="flex justify-content-center align-items-center pt-5">
+        <app-form-submit-btn
+          title="Zapisz"
+          (btnClicked)="save()"
+        ></app-form-submit-btn>
       </div>
     </div>
   </div>

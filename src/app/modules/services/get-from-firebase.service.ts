@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firebaseConfig } from '../../app.config';
-import { map, find, Observable, tap, from } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { SettingsFormValue } from '../models/settings-form';
-import { getDatabase, ref, update } from 'firebase/database';
 import { AuthService } from './auth.service';
 import { SpinnerService } from './spinner.service';
 
@@ -19,6 +18,7 @@ export class GetFromFirebaseService {
   ) {}
 
   getCurrentUser(uid: string): Observable<User | undefined> {
+    this._spinnerService.toFalse();
     return this._http.get(this.db + '/users.json').pipe(
       map((users) => {
         const usersArray = Object.values(users) as User[];
@@ -64,7 +64,19 @@ export class GetFromFirebaseService {
           username: form.username,
           profileImg: form.image,
         })
-        .subscribe((res) => this._spinnerService.toFalse());
+        .subscribe((res) => {
+          this.getCurrentUser(uid).subscribe((res) => {
+            this._authService.currentUser.set({
+              profileImg: res?.profileImg!,
+              username: res?.username!,
+              loses: res?.loses!,
+              wins: res?.wins!,
+              uid: res?.uid!,
+            });
+          });
+
+          this._spinnerService.toFalse();
+        });
     });
   }
 }

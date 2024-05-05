@@ -6,11 +6,18 @@ import { ForgotPassword } from './modules/components/forgot-password/forgot-pass
 import { MatchesHistoryComponent } from './modules/components/matches-history/matches-history.component';
 import { DashboardComponent } from './modules/components/dashboard/dashboard.component';
 import { SettingsComponent } from './modules/components/settings/settings.component';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'dashboard',
+  },
+  {
+    path: '',
     component: MainPageComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'historia-spotkań',
@@ -29,4 +36,5 @@ export const routes: Routes = [
   { path: 'logowanie', component: LoginComponent },
   { path: 'rejestracja', component: RegistrationComponent },
   { path: 'przypomnij-hasło', component: ForgotPassword },
+  { path: '**', redirectTo: 'dashboard' },
 ];

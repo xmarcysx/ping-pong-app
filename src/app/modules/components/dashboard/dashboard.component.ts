@@ -18,7 +18,7 @@ export class DashboardComponent {
     const dialog = this._dialogSerivce.open(AddMatchComponent, {
       header: 'Dodaj mecz',
       width: '40vw',
-      height: '60vh',
+      height: 'auto',
     });
   }
 }
