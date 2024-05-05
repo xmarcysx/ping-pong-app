@@ -5,6 +5,7 @@ import { RegistrationComponent } from './modules/components/registration/registr
 import { ForgotPassword } from './modules/components/forgot-password/forgot-password.component';
 import { MatchesHistoryComponent } from './modules/components/matches-history/matches-history.component';
 import { DashboardComponent } from './modules/components/dashboard/dashboard.component';
+import { SettingsComponent } from './modules/components/settings/settings.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'ustawienia',
+        component: SettingsComponent,
       },
     ],
   },

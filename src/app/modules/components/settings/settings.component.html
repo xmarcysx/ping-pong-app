@@ -1,0 +1,52 @@
+<div class="settings-content">
+  <div class="header">
+    <div class="title">Ustawienia</div>
+    <div class="logo">
+      <img src="../../../../assets/images/logo.png" alt="logo" />
+    </div>
+  </div>
+
+  <div class="content">
+    <form
+      [formGroup]="form"
+      class="flex flex-column align-items-center gap-5 pt-5"
+    >
+      <div class="flex flex-column w-50 f-control">
+        <input
+          id="username"
+          type="text"
+          pInputText
+          class="f-control-input"
+          [formControl]="form.controls.username"
+          autocomplete="off"
+          placeholder=" "
+        />
+        <label for="username" class="f-control-label required"
+          >Nazwa użytkownika</label
+        >
+      </div>
+      <div class="flex flex-column w-50 f-control">
+        <input
+          id="image"
+          type="text"
+          pInputText
+          class="f-control-input"
+          [formControl]="form.controls.image"
+          autocomplete="off"
+          placeholder=" "
+        />
+        <label for="image" class="f-control-label required"
+          >URL zdjęcie profilowe</label
+        >
+      </div>
+    </form>
+    <div class="flex flex-column justify-content-center">
+      <div class="flex justify-content-center align-items-center py-5">
+        <app-form-submit-btn
+          title="Zapisz"
+          (btnClicked)="save()"
+        ></app-form-submit-btn>
+      </div>
+    </div>
+  </div>
+</div>
