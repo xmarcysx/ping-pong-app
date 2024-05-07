@@ -15,7 +15,7 @@ export class DashboardComponent {
   constructor(private _dialogSerivce: DialogService) {}
 
   openAddMatchDialog() {
-    const dialog = this._dialogSerivce.open(AddMatchComponent, {
+    this._dialogSerivce.open(AddMatchComponent, {
       header: 'Dodaj mecz',
       width: '40vw',
       height: 'auto',

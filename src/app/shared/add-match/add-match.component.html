@@ -11,13 +11,13 @@
           <div class="flex align-items-center gap-2">
             <img
               [src]="
-                rival?.profileImg === undefined
+                rival.profileImg === undefined
                   ? '../../../../assets/images/profile.png'
-                  : rival?.profileImg
+                  : rival.profileImg
               "
               style="width: 18px"
             />
-            <div>{{ rival?.username }}</div>
+            <div>{{ rival.username }}</div>
           </div>
         </ng-template>
         <ng-template let-rival pTemplate="item">
@@ -37,7 +37,7 @@
     </div>
     <div class="result">
       <div class="your-resut">
-        <p-rating stars="3">
+        <p-rating stars="3" [(ngModel)]="yourResult">
           <ng-template pTemplate="cancelicon">
             <img
               src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
@@ -61,9 +61,17 @@
           </ng-template>
         </p-rating>
       </div>
-      <span>:</span>
+      <div class="res">
+        <div [className]="getResultClass(this.yourResult, this.rivalResult)">
+          <span [innerHTML]="yourResult ? yourResult : 0"></span>
+        </div>
+        <span>:</span>
+        <div [className]="getResultClass(this.rivalResult, this.yourResult)">
+          <span [innerHTML]="rivalResult ? rivalResult : 0"></span>
+        </div>
+      </div>
       <div class="rival-resut">
-        <p-rating stars="3">
+        <p-rating stars="3" [(ngModel)]="rivalResult">
           <ng-template pTemplate="cancelicon">
             <img
               src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
@@ -90,12 +98,17 @@
     </div>
 
     <div class="preview">
-      <!-- <div class="win-record"><span>Zwycięstwo</span></div> -->
+      @if (yourResult === 3 && rivalResult !== 3) {
+      <div class="win-record"><span>Zwycięstwo</span></div>
+      } @else if (rivalResult === 3 && yourResult !== 3) {
       <div class="lose-record"><span>Porażka</span></div>
+      } @else {
+      <div></div>
+      }
     </div>
 
     <div class="flex flex-column justify-content-center">
-      <div class="flex justify-content-center align-items-center pt-5">
+      <div class="flex justify-content-center align-items-center">
         <app-form-submit-btn
           title="Zapisz"
           (btnClicked)="save()"

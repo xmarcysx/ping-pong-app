@@ -1,28 +1,73 @@
 .main {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 3rem;
   width: 100%;
 
   .content {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
     width: 90%;
 
     .result {
       display: flex;
       flex-direction: row;
-      gap: 1rem;
+      gap: 3rem;
       color: white;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
 
+      .res {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+
+        .win-record {
+          background-color: rgb(41, 180, 41);
+          width: 2rem;
+          padding: 0.25rem;
+          font-size: 1.125rem;
+          font-weight: bold;
+          border-radius: 0.25rem;
+          display: flex;
+          justify-content: center;
+        }
+
+        .undefined-record {
+          background-color: rgb(134, 134, 134);
+          width: 2rem;
+          padding: 0.25rem;
+          font-size: 1.125rem;
+          font-weight: bold;
+          border-radius: 0.25rem;
+          display: flex;
+          justify-content: center;
+        }
+
+        .lose-record {
+          background-color: rgb(221, 30, 30);
+          padding: 0.25rem;
+          font-size: 1.125rem;
+          font-weight: bold;
+          border-radius: 0.25rem;
+          width: 2rem;
+          display: flex;
+          justify-content: center;
+        }
+      }
+
       .your-resut {
+        display: flex;
+        justify-content: start;
+        transform: scaleX(-1);
         width: 50%;
       }
 
       .rival-resut {
+        display: flex;
+        justify-content: start;
         width: 50%;
       }
     }
@@ -33,6 +78,7 @@
       align-items: center;
       width: 100%;
       height: 40px;
+
       .lose-record {
         background-color: rgb(221, 30, 30);
         padding: 0.25rem;

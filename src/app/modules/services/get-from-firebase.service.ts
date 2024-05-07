@@ -27,7 +27,7 @@ export class GetFromFirebaseService {
     );
   }
 
-  getCurrentUserKey(uid: string): Observable<string | undefined> {
+  getUserKey(uid: string): Observable<string | undefined> {
     return this._http.get<User[]>(`${this.db}/users.json`).pipe(
       map((users) => {
         const usersArray = Object.values(users) as User[];
@@ -58,7 +58,7 @@ export class GetFromFirebaseService {
   }
 
   updateCurrentUser(uid: string, form: SettingsFormValue) {
-    this.getCurrentUserKey(uid).subscribe((res) => {
+    this.getUserKey(uid).subscribe((res) => {
       this._http
         .patch(this.db + `/users/${res}.json`, {
           username: form.username,
@@ -75,6 +75,23 @@ export class GetFromFirebaseService {
             });
           });
 
+          this._spinnerService.toFalse();
+        });
+    });
+  }
+
+  updateUserMatchesResult(
+    userUid: string,
+    userKey: string,
+    isMatchWon: boolean
+  ) {
+    this.getCurrentUser(userUid).subscribe((user) => {
+      this._http
+        .patch(`${this.db}/users/${userKey}.json`, {
+          wins: isMatchWon ? user!.wins + 1 : user?.wins,
+          loses: !isMatchWon ? user!.loses + 1 : user?.loses,
+        })
+        .subscribe((res) => {
           this._spinnerService.toFalse();
         });
     });
