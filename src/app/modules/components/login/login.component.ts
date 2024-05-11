@@ -71,15 +71,17 @@ export class LoginComponent implements OnInit {
 
   private _saveCurrentUserData() {
     this._authService.user$.subscribe((user) => {
-      this._getFromFirebase.getCurrentUser(user!.uid).subscribe((res) => {
-        this._authService.currentUser.set({
-          profileImg: res?.profileImg!,
-          username: res?.username!,
-          loses: res?.loses!,
-          wins: res?.wins!,
-          uid: res?.uid!,
+      if (user) {
+        this._getFromFirebase.getCurrentUser(user!.uid).subscribe((res) => {
+          this._authService.currentUser.set({
+            profileImg: res?.profileImg!,
+            username: res?.username!,
+            loses: res?.loses!,
+            wins: res?.wins!,
+            uid: res?.uid!,
+          });
         });
-      });
+      }
     });
   }
 }

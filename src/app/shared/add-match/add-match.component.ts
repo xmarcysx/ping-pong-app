@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GetFromFirebaseService } from '../../modules/services/get-from-firebase.service';
 import { AuthService } from '../../modules/services/auth.service';
 import { User } from '../../modules/models/user';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +8,7 @@ import { FormSubmitBtnComponent } from '../form-submit-btn/form-submit-btn.compo
 import { ToastService } from '../../modules/services/toast.service';
 import { Match } from '../../modules/models/match';
 import { AddMatchService } from '../../modules/services/add-match.service';
+import { GetFromFirebaseService } from '../../modules/services/get-from-firebase.service';
 
 @Component({
   selector: 'app-add-match',
@@ -59,12 +59,12 @@ export class AddMatchComponent implements OnInit {
         (this.rivalResult !== 3 && this.yourResult === 3))
     ) {
       const objToSave: Match = {
-        you: this.you,
-        rival: this.rival,
+        youUid: this.you!.uid,
+        rivalUid: this.rival!.uid,
         yourResult: this.yourResult ? this.yourResult : 0,
         rivalResult: this.rivalResult ? this.rivalResult : 0,
         date: new Date(),
-        isApproved: false,
+        isApproved: true,
       };
 
       this._addMatchService.addMatchToDb(objToSave);

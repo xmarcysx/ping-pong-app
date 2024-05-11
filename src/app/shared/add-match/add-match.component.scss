@@ -27,34 +27,46 @@
         .win-record {
           background-color: rgb(41, 180, 41);
           width: 2rem;
-          padding: 0.25rem;
           font-size: 1.125rem;
+          height: 2rem;
           font-weight: bold;
           border-radius: 0.25rem;
           display: flex;
+          align-items: center;
           justify-content: center;
+          span {
+            font-size: 1.5rem;
+          }
         }
 
         .undefined-record {
           background-color: rgb(134, 134, 134);
-          width: 2rem;
-          padding: 0.25rem;
           font-size: 1.125rem;
           font-weight: bold;
           border-radius: 0.25rem;
+          width: 2rem;
+          height: 2rem;
           display: flex;
+          align-items: center;
           justify-content: center;
+          span {
+            font-size: 1.5rem;
+          }
         }
 
         .lose-record {
           background-color: rgb(221, 30, 30);
-          padding: 0.25rem;
           font-size: 1.125rem;
           font-weight: bold;
           border-radius: 0.25rem;
           width: 2rem;
+          height: 2rem;
           display: flex;
+          align-items: center;
           justify-content: center;
+          span {
+            font-size: 1.5rem;
+          }
         }
       }
 

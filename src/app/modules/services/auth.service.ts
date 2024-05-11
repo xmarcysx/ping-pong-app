@@ -14,8 +14,6 @@ export class AuthService {
   ) {}
 
   handleAuthError(error: any): void {
-    console.log(error);
-
     switch (error.code) {
       case 'auth/email-already-in-use':
         this._toastService.error(

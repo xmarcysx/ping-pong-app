@@ -14,6 +14,7 @@
           [(ngModel)]="rival"
           (onChange)="rivalChanged()"
           [showClear]="true"
+          emptyMessage="Brak przeciwników"
           placeholder="Wybierz przeciwnika"
         >
           <ng-template pTemplate="selectedItem">
@@ -24,7 +25,7 @@
                     ? '../../../../assets/images/profile.png'
                     : rival?.profileImg
                 "
-                style="width: 18px"
+                class="image"
               />
               <div>{{ rival?.username }}</div>
             </div>
@@ -37,7 +38,7 @@
                     ? '../../../../assets/images/profile.png'
                     : rival.profileImg
                 "
-                style="width: 18px"
+                class="image"
               />
               <div>{{ rival.username }}</div>
             </div>
@@ -47,9 +48,17 @@
     </div>
 
     <div class="match-list">
-      @for (match of matches; track $index) {
+      @if (spinnerService.showInnerSpinner()) {
+      <div class="inner-spinner-container">
+        <app-racket-animation></app-racket-animation>
+      </div>
+      } @else { @for (match of matches; track $index) {
       <app-match [match]="match"></app-match>
-      }
+      } @if (!matches.length && rival?.uid) {
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="font-weight-bold text-danger">Brak wyników</div>
+      </div>
+      } }
     </div>
   </div>
 </div>

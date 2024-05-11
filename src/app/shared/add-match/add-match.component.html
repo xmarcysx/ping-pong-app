@@ -5,6 +5,7 @@
         [options]="rivalList"
         [(ngModel)]="rival"
         [showClear]="true"
+        emptyMessage="Brak przeciwników"
         placeholder="Wybierz przeciwnika"
       >
         <ng-template pTemplate="selectedItem">
@@ -15,7 +16,7 @@
                   ? '../../../../assets/images/profile.png'
                   : rival.profileImg
               "
-              style="width: 18px"
+              class="image"
             />
             <div>{{ rival.username }}</div>
           </div>
@@ -28,7 +29,7 @@
                   ? '../../../../assets/images/profile.png'
                   : rival.profileImg
               "
-              style="width: 18px"
+              class="image"
             />
             <div>{{ rival.username }}</div>
           </div>

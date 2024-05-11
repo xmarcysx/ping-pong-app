@@ -108,3 +108,17 @@ ul {
   backdrop-filter: blur(1rem);
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.inner-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.image {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}

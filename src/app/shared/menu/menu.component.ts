@@ -34,15 +34,17 @@ export class MenuComponent implements OnInit {
 
   private _getCurrentUserData() {
     this.authService.user$.subscribe((user) => {
-      this._getFromFirebase.getCurrentUser(user!.uid).subscribe((res) => {
-        this.authService.currentUser.set({
-          profileImg: res?.profileImg!,
-          username: res?.username!,
-          loses: res?.loses!,
-          wins: res?.wins!,
-          uid: res?.uid!,
+      if (user) {
+        this._getFromFirebase.getCurrentUser(user!.uid).subscribe((res) => {
+          this.authService.currentUser.set({
+            profileImg: res?.profileImg!,
+            username: res?.username!,
+            loses: res?.loses!,
+            wins: res?.wins!,
+            uid: res?.uid!,
+          });
         });
-      });
+      }
     });
   }
 }

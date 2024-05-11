@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { GetFromFirebaseService } from './get-from-firebase.service';
 import { Match } from '../models/match';
 import { HttpClient } from '@angular/common/http';
 import { firebaseConfig } from '../../app.config';
 import { SpinnerService } from './spinner.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AddMatchComponent } from '../../shared/add-match/add-match.component';
+import { GetFromFirebaseService } from './get-from-firebase.service';
 
 @Injectable({ providedIn: 'root' })
 export class AddMatchService {
@@ -21,13 +20,19 @@ export class AddMatchService {
   addMatchToDb(addMatchObject: Match) {
     this._spinnerService.toTrue();
     this._closeDialog();
-    const currentUserUid = addMatchObject.you?.uid;
-    const rivalUserUid = addMatchObject.rival?.uid;
+    const currentUserUid = addMatchObject.youUid;
+    const rivalUserUid = addMatchObject.rivalUid;
     const yourResult = addMatchObject.yourResult;
     const rivalResult = addMatchObject.rivalResult;
 
     this._updateUserMatchesData(currentUserUid!, yourResult, addMatchObject);
-    this._updateUserMatchesData(rivalUserUid!, rivalResult, addMatchObject);
+    this._updateUserMatchesData(rivalUserUid!, rivalResult, {
+      ...addMatchObject,
+      youUid: rivalUserUid,
+      yourResult: rivalResult,
+      rivalResult: yourResult,
+      rivalUid: currentUserUid,
+    });
   }
 
   private _updateUserMatchesData(

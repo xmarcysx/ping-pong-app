@@ -18,9 +18,17 @@
     <div class="row py-5">
       <div class="match-list">
         <div class="title">Ostatnie spotkania</div>
-        @for (match of matches; track $index) {
+        @if (spinnerService.showInnerSpinner()) {
+        <div class="inner-spinner-container">
+          <app-racket-animation></app-racket-animation>
+        </div>
+        } @else { @for (match of matches; track $index) {
         <app-match [match]="match"></app-match>
-        }
+        } @if (!matches.length) {
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="font-weight-bold text-danger">Brak wyników</div>
+        </div>
+        } }
       </div>
     </div>
   </div>

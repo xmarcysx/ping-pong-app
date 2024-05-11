@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firebaseConfig } from '../../app.config';
-import { map, Observable } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { User } from '../models/user';
 import { SettingsFormValue } from '../models/settings-form';
 import { AuthService } from './auth.service';
@@ -20,6 +20,16 @@ export class GetFromFirebaseService {
   ) {}
 
   getCurrentUser(uid: string): Observable<User | undefined> {
+    this._spinnerService.toFalse();
+    return this._http.get(this.db + '/users.json').pipe(
+      map((users) => {
+        const usersArray = Object.values(users) as User[];
+        return usersArray.find((user: User) => user.uid === uid);
+      })
+    );
+  }
+
+  getUser(uid: string): Observable<User | undefined> {
     this._spinnerService.toFalse();
     return this._http.get(this.db + '/users.json').pipe(
       map((users) => {
@@ -101,16 +111,78 @@ export class GetFromFirebaseService {
 
   getUserMatches(userUid: string) {
     return this.getCurrentUser(userUid).pipe(
-      map((user) => {
-        if (user?.matches) {
-          const matchesArray = Object.values(user?.matches) as Match[];
-          matchesArray.sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-          );
-          return matchesArray.slice(0, 5);
-        } else {
-          return [];
+      switchMap((user) => {
+        if (!user || !user.matches) {
+          return of([]);
         }
+
+        const matchesArray = Object.values(user.matches) as Match[];
+        matchesArray.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+
+        const fetchRivalObservables = matchesArray.map((match) => {
+          const rivalUid = match.rivalUid;
+          return this.getUser(rivalUid).pipe(
+            map((rivalUser) => {
+              match.rival = rivalUser;
+              return match;
+            })
+          );
+        });
+
+        return forkJoin(fetchRivalObservables).pipe(
+          map((updatedMatches) => {
+            updatedMatches.forEach((updatedMatch, index) => {
+              matchesArray[index] = updatedMatch;
+            });
+            matchesArray.forEach((match) => (match.you = user));
+            return matchesArray.slice(0, 5);
+          })
+        );
+      })
+    );
+  }
+
+  getUserMatchesWithRival(userUid: string, rivalUid: string) {
+    return this.getCurrentUser(userUid).pipe(
+      switchMap((user) => {
+        if (!user || !user.matches) {
+          return of([]); // Zwracamy pustą tablicę, gdy użytkownik nie istnieje lub nie ma meczów
+        }
+
+        const matchesArray = Object.values(user.matches) as Match[];
+        const filteredMatches = matchesArray.filter(
+          (match) => match.rivalUid === rivalUid
+        );
+
+        if (!filteredMatches.length) {
+          return of([]); // Zwracamy pustą tablicę, gdy nie ma meczów z danym oponentem
+        }
+
+        filteredMatches.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+
+        const fetchRivalObservables = filteredMatches.map((match) => {
+          const rivalUid = match.rivalUid;
+          return this.getUser(rivalUid).pipe(
+            map((rivalUser) => {
+              match.rival = rivalUser;
+              return match;
+            })
+          );
+        });
+
+        return forkJoin(fetchRivalObservables).pipe(
+          map((updatedMatches) => {
+            updatedMatches.forEach((updatedMatch, index) => {
+              filteredMatches[index] = updatedMatch;
+            });
+            filteredMatches.forEach((match) => (match.you = user));
+            return filteredMatches;
+          })
+        );
       })
     );
   }
