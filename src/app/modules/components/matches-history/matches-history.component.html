@@ -12,6 +12,7 @@
         <p-dropdown
           [options]="rivalList"
           [(ngModel)]="rival"
+          (onChange)="rivalChanged()"
           [showClear]="true"
           placeholder="Wybierz przeciwnika"
         >
@@ -46,8 +47,9 @@
     </div>
 
     <div class="match-list">
-      <app-match></app-match>
-      <app-match></app-match>
+      @for (match of matches; track $index) {
+      <app-match [match]="match"></app-match>
+      }
     </div>
   </div>
 </div>

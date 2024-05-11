@@ -9,10 +9,8 @@
     justify-content: center;
     width: 75%;
     border: 1px solid rgb(41, 180, 41);
-    //   border: 1px solid rgb(221, 30, 30);
-    border-radius: 1.5rem;
+    border-radius: 30px 30px 30px 30px;
     background: rgba(41, 180, 41, 0.25);
-    //   background: rgba(221, 30, 30, 0.25);
 
     .player {
       width: 50%;
@@ -21,15 +19,42 @@
       justify-content: space-between;
       gap: 1rem;
       .player-logo {
-        width: 10%;
+        width: 20%;
         img {
-          width: 100%;
+          border-radius: 50%;
+          height: 57px;
+          width: 57px;
+          object-fit: cover;
         }
       }
 
       .player-name {
         text-align: center;
         width: 80%;
+      }
+    }
+
+    .rival {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      .rival-name {
+        text-align: center;
+        width: 80%;
+      }
+
+      .rival-logo {
+        display: flex;
+        justify-content: end;
+        width: 20%;
+        img {
+          border-radius: 50%;
+          height: 57px;
+          width: 57px;
+          object-fit: cover;
+        }
       }
     }
 
@@ -65,10 +90,11 @@
     justify-content: center;
     width: 75%;
     border: 1px solid rgb(221, 30, 30);
-    border-radius: 1.5rem;
+    border-radius: 30px 30px 30px 30px;
     background: rgba(221, 30, 30, 0.25);
 
     .player {
+      width: 50%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -76,13 +102,40 @@
       .player-logo {
         width: 10%;
         img {
-          width: 100%;
+          border-radius: 50%;
+          height: 57px;
+          width: 57px;
+          object-fit: cover;
         }
       }
 
       .player-name {
         text-align: center;
         width: 80%;
+      }
+    }
+
+    .rival {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      .rival-name {
+        text-align: center;
+        width: 80%;
+      }
+
+      .rival-logo {
+        display: flex;
+        justify-content: end;
+        width: 20%;
+        img {
+          border-radius: 50%;
+          height: 57px;
+          width: 57px;
+          object-fit: cover;
+        }
       }
     }
 

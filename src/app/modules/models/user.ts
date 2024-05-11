@@ -5,4 +5,5 @@ export interface User {
   wins: number;
   uid: string;
   email?: string;
+  matches?: [];
 }

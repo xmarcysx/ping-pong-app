@@ -6,6 +6,8 @@ import { User } from '../models/user';
 import { SettingsFormValue } from '../models/settings-form';
 import { AuthService } from './auth.service';
 import { SpinnerService } from './spinner.service';
+import { User as UserFromFirebase } from 'firebase/auth';
+import { Match } from '../models/match';
 
 @Injectable({ providedIn: 'root' })
 export class GetFromFirebaseService {
@@ -95,5 +97,21 @@ export class GetFromFirebaseService {
           this._spinnerService.toFalse();
         });
     });
+  }
+
+  getUserMatches(userUid: string) {
+    return this.getCurrentUser(userUid).pipe(
+      map((user) => {
+        if (user?.matches) {
+          const matchesArray = Object.values(user?.matches) as Match[];
+          matchesArray.sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          );
+          return matchesArray.slice(0, 5);
+        } else {
+          return [];
+        }
+      })
+    );
   }
 }

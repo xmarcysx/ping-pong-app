@@ -7,7 +7,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RatingModule } from 'primeng/rating';
 import { FormSubmitBtnComponent } from '../form-submit-btn/form-submit-btn.component';
 import { ToastService } from '../../modules/services/toast.service';
-import { AddMatch } from '../../modules/models/add-match';
+import { Match } from '../../modules/models/match';
 import { AddMatchService } from '../../modules/services/add-match.service';
 
 @Component({
@@ -58,7 +58,7 @@ export class AddMatchComponent implements OnInit {
       ((this.rivalResult === 3 && this.yourResult !== 3) ||
         (this.rivalResult !== 3 && this.yourResult === 3))
     ) {
-      const objToSave: AddMatch = {
+      const objToSave: Match = {
         you: this.you,
         rival: this.rival,
         yourResult: this.yourResult ? this.yourResult : 0,

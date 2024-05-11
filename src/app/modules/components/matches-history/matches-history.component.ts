@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { GetFromFirebaseService } from '../../services/get-from-firebase.service';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormsModule } from '@angular/forms';
+import { Match } from '../../models/match';
 
 @Component({
   selector: 'app-matches-history',
@@ -16,6 +17,7 @@ import { FormControl, FormsModule } from '@angular/forms';
 export class MatchesHistoryComponent implements OnInit {
   rivalList: User[] | undefined;
   rival: User | undefined;
+  matches: Match[] = [];
 
   constructor(
     private _authService: AuthService,
@@ -24,6 +26,18 @@ export class MatchesHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this._getRivalList();
+  }
+
+  rivalChanged() {
+    if (this.rival?.matches) {
+      const currentUserUid = this._authService.currentUser()?.uid;
+      const rivalMatches = Object.values(this.rival.matches) as Match[];
+      this.matches = rivalMatches.filter(
+        (match) => match.you?.uid === currentUserUid
+      );
+    } else {
+      this.matches = [];
+    }
   }
 
   private _getRivalList() {

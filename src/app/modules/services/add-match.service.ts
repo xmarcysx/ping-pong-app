@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GetFromFirebaseService } from './get-from-firebase.service';
-import { AddMatch } from '../models/add-match';
+import { Match } from '../models/match';
 import { HttpClient } from '@angular/common/http';
 import { firebaseConfig } from '../../app.config';
 import { SpinnerService } from './spinner.service';
@@ -18,7 +18,7 @@ export class AddMatchService {
     private _spinnerService: SpinnerService
   ) {}
 
-  addMatchToDb(addMatchObject: AddMatch) {
+  addMatchToDb(addMatchObject: Match) {
     this._spinnerService.toTrue();
     this._closeDialog();
     const currentUserUid = addMatchObject.you?.uid;
@@ -33,7 +33,7 @@ export class AddMatchService {
   private _updateUserMatchesData(
     userUid: string,
     userResult: number,
-    addMatchObject: AddMatch
+    addMatchObject: Match
   ) {
     this._getFromFirebaseService.getUserKey(userUid).subscribe((userKey) => {
       this._http
