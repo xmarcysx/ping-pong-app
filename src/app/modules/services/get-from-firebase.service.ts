@@ -39,6 +39,19 @@ export class GetFromFirebaseService {
     );
   }
 
+  getUserMatchesList(uid: string): Observable<Match[] | undefined> {
+    this._spinnerService.toFalse();
+    return this._http.get(this.db + `/matches-${uid}.json`).pipe(
+      map((matches) => {
+        if (!matches) {
+          return [];
+        }
+        const matchesArray = Object.values(matches) as Match[];
+        return matchesArray;
+      })
+    );
+  }
+
   getUserKey(uid: string): Observable<string | undefined> {
     return this._http.get<User[]>(`${this.db}/users.json`).pipe(
       map((users) => {
@@ -109,35 +122,70 @@ export class GetFromFirebaseService {
     });
   }
 
+  // getUserMatches(userUid: string) {
+  //   return this.getCurrentUser(userUid).pipe(
+  //     switchMap((user) => {
+  //       if (!user || !user.matches) {
+  //         return of([]);
+  //       }
+
+  //       const matchesArray = Object.values(user.matches) as Match[];
+  //       matchesArray.sort(
+  //         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  //       );
+
+  //       const fetchRivalObservables = matchesArray.map((match) => {
+  //         const rivalUid = match.rivalUid;
+  //         return this.getUser(rivalUid).pipe(
+  //           map((rivalUser) => {
+  //             match.rival = rivalUser;
+  //             return match;
+  //           })
+  //         );
+  //       });
+
+  //       return forkJoin(fetchRivalObservables).pipe(
+  //         map((updatedMatches) => {
+  //           updatedMatches.forEach((updatedMatch, index) => {
+  //             matchesArray[index] = updatedMatch;
+  //           });
+  //           matchesArray.forEach((match) => (match.you = user));
+  //           return matchesArray.slice(0, 5);
+  //         })
+  //       );
+  //     })
+  //   );
+  // }
+
   getUserMatches(userUid: string) {
-    return this.getCurrentUser(userUid).pipe(
-      switchMap((user) => {
-        if (!user || !user.matches) {
+    return this.getUserMatchesList(userUid).pipe(
+      switchMap((matches) => {
+        if (!matches?.length) {
           return of([]);
         }
 
-        const matchesArray = Object.values(user.matches) as Match[];
-        matchesArray.sort(
+        const sortedMatches = matches.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
 
-        const fetchRivalObservables = matchesArray.map((match) => {
+        const fetchObservables = sortedMatches.map((match) => {
+          const youUid = match.youUid;
           const rivalUid = match.rivalUid;
-          return this.getUser(rivalUid).pipe(
-            map((rivalUser) => {
-              match.rival = rivalUser;
+          const userObservable = this.getUser(youUid);
+          const rivalObservable = this.getUser(rivalUid);
+
+          return forkJoin([userObservable, rivalObservable]).pipe(
+            map(([you, rival]) => {
+              match.you = you;
+              match.rival = rival;
               return match;
             })
           );
         });
 
-        return forkJoin(fetchRivalObservables).pipe(
+        return forkJoin(fetchObservables).pipe(
           map((updatedMatches) => {
-            updatedMatches.forEach((updatedMatch, index) => {
-              matchesArray[index] = updatedMatch;
-            });
-            matchesArray.forEach((match) => (match.you = user));
-            return matchesArray.slice(0, 5);
+            return updatedMatches.slice(0, 5);
           })
         );
       })
@@ -145,42 +193,45 @@ export class GetFromFirebaseService {
   }
 
   getUserMatchesWithRival(userUid: string, rivalUid: string) {
-    return this.getCurrentUser(userUid).pipe(
-      switchMap((user) => {
-        if (!user || !user.matches) {
-          return of([]); // Zwracamy pustą tablicę, gdy użytkownik nie istnieje lub nie ma meczów
+    return this.getUserMatchesList(userUid).pipe(
+      switchMap((matches) => {
+        if (!matches?.length) {
+          return of([]);
         }
 
-        const matchesArray = Object.values(user.matches) as Match[];
-        const filteredMatches = matchesArray.filter(
+        const filteredMatches = matches.filter(
           (match) => match.rivalUid === rivalUid
         );
 
         if (!filteredMatches.length) {
-          return of([]); // Zwracamy pustą tablicę, gdy nie ma meczów z danym oponentem
+          return of([]);
         }
 
-        filteredMatches.sort(
+        const sortedMatches = filteredMatches.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
 
-        const fetchRivalObservables = filteredMatches.map((match) => {
+        const fetchObservables = sortedMatches.map((match) => {
+          const youUid = match.youUid;
           const rivalUid = match.rivalUid;
-          return this.getUser(rivalUid).pipe(
-            map((rivalUser) => {
-              match.rival = rivalUser;
+          const userObservable = this.getUser(youUid);
+          const rivalObservable = this.getUser(rivalUid);
+
+          return forkJoin([userObservable, rivalObservable]).pipe(
+            map(([you, rival]) => {
+              match.you = you;
+              match.rival = rival;
               return match;
             })
           );
         });
 
-        return forkJoin(fetchRivalObservables).pipe(
+        return forkJoin(fetchObservables).pipe(
           map((updatedMatches) => {
             updatedMatches.forEach((updatedMatch, index) => {
-              filteredMatches[index] = updatedMatch;
+              sortedMatches[index].rival = updatedMatch.rival;
             });
-            filteredMatches.forEach((match) => (match.you = user));
-            return filteredMatches;
+            return sortedMatches.slice(0, 5);
           })
         );
       })

@@ -42,7 +42,7 @@ export class AddMatchService {
   ) {
     this._getFromFirebaseService.getUserKey(userUid).subscribe((userKey) => {
       this._http
-        .post(this.db + `/users/${userKey}/matches.json`, {
+        .post(this.db + `/matches-${userUid}.json`, {
           ...addMatchObject,
           win: this._isMatchWin(userResult),
         })

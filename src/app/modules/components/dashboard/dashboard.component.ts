@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatchComponent } from '../../../shared/match/match.component';
 import { FormSubmitBtnComponent } from '../../../shared/form-submit-btn/form-submit-btn.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -8,6 +8,9 @@ import { Match } from '../../models/match';
 import { GetFromFirebaseService } from '../../services/get-from-firebase.service';
 import { RacketAnimationComponent } from '../../../shared/racket-animation/racket-animation.component';
 import { SpinnerService } from '../../services/spinner.service';
+import { Subscription } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,11 +19,14 @@ import { SpinnerService } from '../../services/spinner.service';
   styleUrl: './dashboard.component.scss',
   imports: [MatchComponent, FormSubmitBtnComponent, RacketAnimationComponent],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   matches: Match[] = [];
+  private _subscription = new Subscription();
 
   constructor(
     public spinnerService: SpinnerService,
+    private _toastService: ToastService,
+    private _angularFireDatabase: AngularFireDatabase,
     private _dialogSerivce: DialogService,
     private _getFromFirbaseService: GetFromFirebaseService,
     private _auth: AuthService
@@ -28,6 +34,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this._getUserMatches();
+    this._watchMatches();
   }
 
   openAddMatchDialog() {
@@ -36,6 +43,10 @@ export class DashboardComponent implements OnInit {
       width: '40vw',
       height: 'auto',
     });
+  }
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 
   private _getUserMatches() {
@@ -49,5 +60,17 @@ export class DashboardComponent implements OnInit {
     } else {
       this.spinnerService.toFalseInnerSpinner();
     }
+  }
+
+  private _watchMatches() {
+    const userUid = this._auth.currentUser()!.uid;
+    this._subscription.add(
+      this._angularFireDatabase
+        .list(`matches-${userUid}`)
+        .valueChanges()
+        .subscribe((res) => {
+          this._getUserMatches();
+        })
+    );
   }
 }

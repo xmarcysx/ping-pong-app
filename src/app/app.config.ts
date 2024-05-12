@@ -9,6 +9,8 @@ import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DialogService } from 'primeng/dynamicdialog';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireModule } from '@angular/fire/compat';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyBnFDVY292hPJ-J63CFROOSRWuGc6M3IAs',
@@ -32,5 +34,6 @@ export const appConfig: ApplicationConfig = {
     ]),
     MessageService,
     DialogService,
+    importProvidersFrom(AngularFireModule.initializeApp(firebaseConfig)),
   ],
 };
