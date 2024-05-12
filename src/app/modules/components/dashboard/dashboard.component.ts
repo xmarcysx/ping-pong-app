@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     public spinnerService: SpinnerService,
-    private _toastService: ToastService,
     private _angularFireDatabase: AngularFireDatabase,
     private _dialogSerivce: DialogService,
     private _getFromFirbaseService: GetFromFirebaseService,
