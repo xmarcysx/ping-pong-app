@@ -1,27 +1,41 @@
-# PingPongApp
+# Aplikacja Ping Pong
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
+Witaj w aplikacji Ping Pong, prostym narzędziu internetowym zaprojektowanym do śledzenia wyników meczów ping ponga w Twojej społeczności graczy. Aplikacja umożliwia użytkownikom rejestrowanie wyników swoich meczów i przeglądanie aktualnych statystyk w społeczności.
 
-## Development server
+## Funkcje
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Rejestrowanie Wyników Meczów**: Użytkownicy mogą zalogować się do aplikacji i rejestrować wyniki swoich meczów ping ponga, włączając w to wyniki poszczególnych gier.
+- **Przeglądanie Statystyk**: Aplikacja dynamicznie aktualizuje statystyki na podstawie zarejestrowanych wyników meczów, umożliwiając użytkownikom zobaczenie, kto prowadzi w rankingu społeczności.
+- **Autoryzacja Użytkowników**: Bezpieczny system autoryzacji użytkowników zapewnia, że tylko uprawnione osoby mogą rejestrować wyniki meczów i przeglądać statystyki.
+- **Responsywny Design**: Aplikacja została zbudowana przy użyciu Angular CLI, zapewniając responsywność i przyjazne użytkownikowi doświadczenie na różnych urządzeniach i rozmiarach ekranu.
 
-## Code scaffolding
+## Jak Zacząć
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Aby rozpocząć korzystanie z aplikacji Ping Pong, wykonaj następujące kroki:
 
-## Build
+1. **Sklonuj Repozytorium**: Sklonuj repozytorium aplikacji Ping Pong na swój lokalny komputer.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    ```bash
+    git clone https://github.com/twoja-nazwa-uzytkownika/ping-pong-app.git
+    ```
 
-## Running unit tests
+2. **Zainstaluj Zależności**: Przejdź do katalogu projektu i zainstaluj niezbędne zależności przy użyciu npm.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    ```bash
+    cd ping-pong-app
+    npm install
+    ```
 
-## Running end-to-end tests
+3. **Uruchom Serwer Deweloperski**: Uruchom serwer deweloperski Angulara, aby uruchomić aplikację lokalnie.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ```bash
+    ng serve
+    ```
 
-## Further help
+4. **Dostęp do Aplikacji**: Otwórz swoją przeglądarkę internetową i przejdź do `http://localhost:4200/`, aby uzyskać dostęp do aplikacji Ping Pong. Teraz możesz rozpocząć rejestrowanie wyników meczów i eksplorować statystyki w swojej społeczności ping ponga.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Wsparcie
+
+W przypadku dalszych pytań lub zapytań dotyczących aplikacji Ping Pong, możesz skonsultować się z [Angular CLI Overview and Command Reference](https://angular.io/cli) lub skontaktować się z opiekunami projektu poprzez repozytorium GitHub.
+
+Miłej gry! 🏓
