@@ -3,6 +3,8 @@
     <div class="player">
       <div class="player-logo">
         <img
+          (click)="youDataPanel.toggle($event)"
+          class="cursor-pointer"
           [src]="
             match!.you!.profileImg === undefined
               ? '../../../../assets/images/profile.png'
@@ -10,6 +12,36 @@
           "
           alt="logo"
         />
+        <p-overlayPanel #youDataPanel>
+          <div class="nav-header">
+            <div class="flex flex-column justify-content-center">
+              <div class="p-3 flex justify-content-center">
+                <img
+                  [src]="
+                    match!.you?.profileImg === undefined
+                      ? '../../../assets/images/profile.png'
+                      : match!.you?.profileImg
+                  "
+                  alt="logo"
+                />
+              </div>
+              <p class="username text-center">
+                {{ match!.you?.username }}
+              </p>
+            </div>
+
+            <div class="flex flex-column justify-content-center pb-3">
+              <div class="flex justify-content-center align-items-center gap-1">
+                <div class="win-record">
+                  <span> {{ match!.you?.wins }} </span>
+                </div>
+                <div class="lose-record">
+                  <span>{{ match!.you?.loses }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-overlayPanel>
       </div>
       <div class="player-name">{{ match!.you!.username }}</div>
     </div>
@@ -27,6 +59,8 @@
       <div class="rival-name">{{ match!.rival!.username }}</div>
       <div class="rival-logo">
         <img
+          (click)="rivalDataPanel.toggle($event)"
+          class="cursor-pointer"
           [src]="
             match!.rival!.profileImg === undefined
               ? '../../../../assets/images/profile.png'
@@ -34,6 +68,36 @@
           "
           alt="logo"
         />
+        <p-overlayPanel #rivalDataPanel>
+          <div class="nav-header">
+            <div class="flex flex-column justify-content-center">
+              <div class="p-3 flex justify-content-center">
+                <img
+                  [src]="
+                    match!.rival?.profileImg === undefined
+                      ? '../../../assets/images/profile.png'
+                      : match!.rival?.profileImg
+                  "
+                  alt="logo"
+                />
+              </div>
+              <p class="username text-center">
+                {{ match!.rival?.username }}
+              </p>
+            </div>
+
+            <div class="flex flex-column justify-content-center pb-3">
+              <div class="flex justify-content-center align-items-center gap-1">
+                <div class="win-record">
+                  <span> {{ match!.rival?.wins }} </span>
+                </div>
+                <div class="lose-record">
+                  <span>{{ match!.rival?.loses }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-overlayPanel>
       </div>
     </div>
   </div>

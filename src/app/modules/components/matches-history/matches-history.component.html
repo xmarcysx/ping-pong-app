@@ -46,19 +46,28 @@
         </p-dropdown>
       </div>
     </div>
-
-    <div class="match-list">
-      @if (spinnerService.showInnerSpinner()) {
-      <div class="inner-spinner-container">
-        <app-racket-animation></app-racket-animation>
+    <div class="row py-5">
+      <div class="match-list">
+        @if (spinnerService.showInnerSpinner()) {
+        <div class="inner-spinner-container">
+          <app-racket-animation></app-racket-animation>
+        </div>
+        } @else { @if (matches.length) {
+        <div class="title">Bilans</div>
+        <div class="flex flex-column justify-content-center pb-3">
+          <div class="flex justify-content-center align-items-center gap-1">
+            <div class="win-record">
+              <span [innerHTML]="getWinMatches(matches)"></span>
+            </div>
+            <div class="lose-record">
+              <span [innerHTML]="getLoseMatches(matches)"></span>
+            </div>
+          </div>
+        </div>
+        @for (match of matches; track $index) {
+        <app-match [match]="match"></app-match>
+        } }}
       </div>
-      } @else { @for (match of matches; track $index) {
-      <app-match [match]="match"></app-match>
-      } @if (!matches.length && rival?.uid) {
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="font-weight-bold text-danger">Brak wyników</div>
-      </div>
-      } }
     </div>
   </div>
 </div>

@@ -27,6 +27,9 @@ export class AuthGuard implements CanActivate {
       map((user) => {
         if (user) {
           this._spinnerService.toTrue();
+          this._getFromFirebase.getAllUsers().subscribe((res) => {
+            this._getFromFirebase.users.set(res);
+          });
           this._getFromFirebase.getCurrentUser(user!.uid).subscribe((res) => {
             this._authService.currentUser.set({
               profileImg: res?.profileImg!,
@@ -45,14 +48,3 @@ export class AuthGuard implements CanActivate {
     );
   }
 }
-// this._spinnerService.toTrue();
-
-// this._getFromFirebase.getCurrentUser(user!.uid).subscribe((res) => {
-//   this.authService.currentUser.set({
-//     profileImg: res?.profileImg!,
-//     username: res?.username!,
-//     loses: res?.loses!,
-//     wins: res?.wins!,
-//     uid: res?.uid!,
-//   });
-// });

@@ -52,6 +52,14 @@ export class MatchesHistoryComponent implements OnInit {
     }
   }
 
+  getWinMatches(matches: Match[]): number {
+    return matches?.filter((match) => match?.win)?.length;
+  }
+
+  getLoseMatches(matches: Match[]): number {
+    return matches?.filter((match) => !match?.win)?.length;
+  }
+
   private _getRivalList() {
     const currentUserUid = this._authService.currentUser()?.uid;
     this._getFromFirebaseService

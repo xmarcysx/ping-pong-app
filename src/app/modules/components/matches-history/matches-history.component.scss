@@ -31,3 +31,36 @@
     }
   }
 }
+
+.title {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.lose-record {
+  background-color: rgb(221, 30, 30);
+  font-weight: bold;
+  border-radius: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 1.5rem;
+  }
+}
+
+.win-record {
+  background-color: rgb(41, 180, 41);
+  width: 2rem;
+  height: 2rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 1.5rem;
+  }
+}

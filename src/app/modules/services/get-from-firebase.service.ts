@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { firebaseConfig } from '../../app.config';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { User } from '../models/user';
@@ -12,6 +12,7 @@ import { Match } from '../models/match';
 @Injectable({ providedIn: 'root' })
 export class GetFromFirebaseService {
   db = firebaseConfig.databaseURL;
+  users = signal<User[] | undefined>([]);
 
   constructor(
     private _http: HttpClient,
@@ -31,12 +32,17 @@ export class GetFromFirebaseService {
 
   getUser(uid: string): Observable<User | undefined> {
     this._spinnerService.toFalse();
-    return this._http.get(this.db + '/users.json').pipe(
-      map((users) => {
-        const usersArray = Object.values(users) as User[];
-        return usersArray.find((user: User) => user.uid === uid);
-      })
-    );
+    if (this.users()?.length) {
+      const user = this.users()?.find((user: User) => user.uid === uid);
+      return of(user);
+    } else {
+      return this._http.get(this.db + '/users.json').pipe(
+        map((users) => {
+          const usersArray = Object.values(users) as User[];
+          return usersArray.find((user: User) => user.uid === uid);
+        })
+      );
+    }
   }
 
   getUserMatchesList(uid: string): Observable<Match[] | undefined> {
@@ -121,41 +127,6 @@ export class GetFromFirebaseService {
         });
     });
   }
-
-  // getUserMatches(userUid: string) {
-  //   return this.getCurrentUser(userUid).pipe(
-  //     switchMap((user) => {
-  //       if (!user || !user.matches) {
-  //         return of([]);
-  //       }
-
-  //       const matchesArray = Object.values(user.matches) as Match[];
-  //       matchesArray.sort(
-  //         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  //       );
-
-  //       const fetchRivalObservables = matchesArray.map((match) => {
-  //         const rivalUid = match.rivalUid;
-  //         return this.getUser(rivalUid).pipe(
-  //           map((rivalUser) => {
-  //             match.rival = rivalUser;
-  //             return match;
-  //           })
-  //         );
-  //       });
-
-  //       return forkJoin(fetchRivalObservables).pipe(
-  //         map((updatedMatches) => {
-  //           updatedMatches.forEach((updatedMatch, index) => {
-  //             matchesArray[index] = updatedMatch;
-  //           });
-  //           matchesArray.forEach((match) => (match.you = user));
-  //           return matchesArray.slice(0, 5);
-  //         })
-  //       );
-  //     })
-  //   );
-  // }
 
   getUserMatches(userUid: string) {
     return this.getUserMatchesList(userUid).pipe(

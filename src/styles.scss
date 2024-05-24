@@ -122,3 +122,13 @@ ul {
   border-radius: 50%;
   object-fit: cover;
 }
+
+.p-overlaypanel {
+  backdrop-filter: blur(1rem);
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.p-overlaypanel:after,
+.p-overlaypanel:before {
+  display: none;
+}

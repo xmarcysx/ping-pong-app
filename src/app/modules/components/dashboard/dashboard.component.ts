@@ -32,7 +32,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._getUserMatches();
     this._watchMatches();
   }
 
@@ -51,7 +50,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private _getUserMatches() {
     const userUid = this._auth.currentUser()!.uid;
     if (userUid) {
-      this.spinnerService.toTrueInnerSpinner();
       this._getFromFirbaseService.getUserMatches(userUid).subscribe((res) => {
         this.spinnerService.toFalseInnerSpinner();
         this.matches = res;
@@ -62,6 +60,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private _watchMatches() {
+    this.spinnerService.toTrueInnerSpinner();
     const userUid = this._auth.currentUser()!.uid;
     this._subscription.add(
       this._angularFireDatabase
