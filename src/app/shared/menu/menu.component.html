@@ -11,7 +11,7 @@
           alt="logo"
         />
       </div>
-      <p class="username text-center">
+      <p class="username text-center d-none d-lg-block">
         {{ authService.currentUser()?.username }}
       </p>
     </div>
@@ -32,13 +32,15 @@
     <div class="nav-main">
       <ul>
         <li [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
-          <i class="pi pi-home"></i>Dashboard
+          <i class="pi pi-home"></i
+          ><span class="d-none d-lg-block">Dashboard</span>
         </li>
         <li
           [routerLink]="['/historia-spotkań']"
           routerLinkActive="router-link-active"
         >
-          <i class="pi pi-history"></i>Historia spotkań
+          <i class="pi pi-history"></i
+          ><span class="d-none d-lg-block">Historia spotkań</span>
         </li>
         <!-- <li><i class="pi pi-bell"></i>Powiadomienia</li> -->
       </ul>
@@ -50,9 +52,13 @@
           [routerLink]="['/ustawienia']"
           routerLinkActive="router-link-active"
         >
-          <i class="pi pi-cog"></i>Ustawienia
+          <i class="pi pi-cog"></i
+          ><span class="d-none d-lg-block">Ustawienia</span>
         </li>
-        <li (click)="logout()"><i class="pi pi-sign-out"></i>Wyloguj się</li>
+        <li (click)="logout()">
+          <i class="pi pi-sign-out"></i
+          ><span class="d-none d-lg-block">Wyloguj się</span>
+        </li>
       </ul>
     </div>
   </div>

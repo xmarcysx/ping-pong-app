@@ -43,7 +43,9 @@
           </div>
         </p-overlayPanel>
       </div>
-      <div class="player-name">{{ match!.you!.username }}</div>
+      <div class="player-name d-none d-lg-block">
+        {{ match!.you!.username }}
+      </div>
     </div>
     <div class="result">
       <div class="flex justify-content-center align-items-center gap-1">
@@ -56,7 +58,9 @@
       </div>
     </div>
     <div class="rival">
-      <div class="rival-name">{{ match!.rival!.username }}</div>
+      <div class="rival-name d-none d-lg-block">
+        {{ match!.rival!.username }}
+      </div>
       <div class="rival-logo">
         <img
           (click)="rivalDataPanel.toggle($event)"

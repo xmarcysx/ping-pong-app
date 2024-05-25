@@ -132,3 +132,9 @@ ul {
 .p-overlaypanel:before {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .f-control {
+    width: 90% !important;
+  }
+}

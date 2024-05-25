@@ -64,3 +64,9 @@
     font-size: 1.5rem;
   }
 }
+
+@media (max-width: 768px) {
+  .dropdown {
+    width: 90% !important;
+  }
+}

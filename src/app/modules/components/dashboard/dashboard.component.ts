@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openAddMatchDialog() {
     this._dialogSerivce.open(AddMatchComponent, {
       header: 'Dodaj wynik meczu',
-      width: '40vw',
+      width: 'auto',
       height: 'auto',
     });
   }
