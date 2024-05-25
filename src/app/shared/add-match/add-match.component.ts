@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../modules/services/auth.service';
 import { User } from '../../modules/models/user';
 import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 import { RatingModule } from 'primeng/rating';
 import { FormSubmitBtnComponent } from '../form-submit-btn/form-submit-btn.component';
 import { ToastService } from '../../modules/services/toast.service';
@@ -23,11 +23,18 @@ export class AddMatchComponent implements OnInit {
   you!: User | undefined | null;
   yourResult = 0;
   rivalResult = 0;
+  balls = 3;
+  format = { sets: 3, label: 'Do 3 wygranych setów' };
   scoreList = [
     { id: 0, label: '0' },
     { id: 1, label: '1' },
     { id: 2, label: '2' },
     { id: 3, label: '3' },
+  ];
+  formatList = [
+    { sets: 3, label: 'Do 3 wygranych setów' },
+    { sets: 2, label: 'Do 2 wygranych setów' },
+    { sets: 1, label: 'Do 1 wygranej setów' },
   ];
 
   constructor(
@@ -43,20 +50,28 @@ export class AddMatchComponent implements OnInit {
   }
 
   getResultClass(yourResult: number, rivalResult: number) {
-    if (yourResult === 3 && rivalResult !== 3) {
+    if (yourResult === this.balls && rivalResult !== this.balls) {
       return 'win-record';
-    } else if (rivalResult === 3 && yourResult !== 3) {
+    } else if (rivalResult === this.balls && yourResult !== this.balls) {
       return 'lose-record';
     } else {
       return 'undefined-record';
     }
   }
 
+  formatChanged(e: DropdownChangeEvent) {
+    if (e?.value?.sets) {
+      this.balls = e.value.sets;
+    } else {
+      this.balls = 0;
+    }
+  }
+
   save() {
     if (
       this.rival !== undefined &&
-      ((this.rivalResult === 3 && this.yourResult !== 3) ||
-        (this.rivalResult !== 3 && this.yourResult === 3))
+      ((this.rivalResult === this.balls && this.yourResult !== this.balls) ||
+        (this.rivalResult !== this.balls && this.yourResult === this.balls))
     ) {
       const objToSave: Match = {
         youUid: this.you!.uid,

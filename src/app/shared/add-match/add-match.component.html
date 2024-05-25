@@ -36,72 +36,211 @@
         </ng-template>
       </p-dropdown>
     </div>
-    <div class="result">
-      <div class="your-resut">
-        <p-rating stars="3" [(ngModel)]="yourResult">
-          <ng-template pTemplate="cancelicon">
-            <img
-              src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
-              width="25px"
-              height="25px"
-            />
-          </ng-template>
-          <ng-template pTemplate="onicon">
-            <img
-              src="../../../assets/images/ping-pong-ball-active.png"
-              width="25px"
-              height="25px"
-            />
-          </ng-template>
-          <ng-template pTemplate="officon">
-            <img
-              src="../../../assets/images/ping-pong-ball.png"
-              width="25px"
-              height="25px"
-            />
-          </ng-template>
-        </p-rating>
+    <div class="d-flex flex-column gap-5 justify-content-center">
+      <div class="d-flex justify-content-center">
+        <p-dropdown
+          class="w-50"
+          (onChange)="formatChanged($event)"
+          [options]="formatList"
+          [(ngModel)]="format"
+          [showClear]="true"
+          placeholder="Wybierz format"
+        ></p-dropdown>
       </div>
-      <div class="res">
-        <div [className]="getResultClass(this.yourResult, this.rivalResult)">
-          <span [innerHTML]="yourResult ? yourResult : 0"></span>
+
+      @if (this.balls === 3) {
+      <div class="result">
+        <div class="your-resut">
+          <p-rating stars="3" [(ngModel)]="yourResult">
+            <ng-template pTemplate="cancelicon">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="onicon">
+              <img
+                src="../../../assets/images/ping-pong-ball-active.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="officon">
+              <img
+                src="../../../assets/images/ping-pong-ball.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+          </p-rating>
         </div>
-        <span>:</span>
-        <div [className]="getResultClass(this.rivalResult, this.yourResult)">
-          <span [innerHTML]="rivalResult ? rivalResult : 0"></span>
+        <div class="res">
+          <div [className]="getResultClass(this.yourResult, this.rivalResult)">
+            <span [innerHTML]="yourResult ? yourResult : 0"></span>
+          </div>
+          <span>:</span>
+          <div [className]="getResultClass(this.rivalResult, this.yourResult)">
+            <span [innerHTML]="rivalResult ? rivalResult : 0"></span>
+          </div>
+        </div>
+        <div class="rival-resut">
+          <p-rating stars="3" [(ngModel)]="rivalResult">
+            <ng-template pTemplate="cancelicon">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="onicon">
+              <img
+                src="../../../assets/images/ping-pong-ball-active.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="officon">
+              <img
+                src="../../../assets/images/ping-pong-ball.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+          </p-rating>
         </div>
       </div>
-      <div class="rival-resut">
-        <p-rating stars="3" [(ngModel)]="rivalResult">
-          <ng-template pTemplate="cancelicon">
-            <img
-              src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
-              width="25px"
-              height="25px"
-            />
-          </ng-template>
-          <ng-template pTemplate="onicon">
-            <img
-              src="../../../assets/images/ping-pong-ball-active.png"
-              width="25px"
-              height="25px"
-            />
-          </ng-template>
-          <ng-template pTemplate="officon">
-            <img
-              src="../../../assets/images/ping-pong-ball.png"
-              width="25px"
-              height="25px"
-            />
-          </ng-template>
-        </p-rating>
+      } @else if (this.balls === 2) {
+      <div class="result">
+        <div class="your-resut">
+          <p-rating stars="2" [(ngModel)]="yourResult">
+            <ng-template pTemplate="cancelicon">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="onicon">
+              <img
+                src="../../../assets/images/ping-pong-ball-active.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="officon">
+              <img
+                src="../../../assets/images/ping-pong-ball.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+          </p-rating>
+        </div>
+        <div class="res">
+          <div [className]="getResultClass(this.yourResult, this.rivalResult)">
+            <span [innerHTML]="yourResult ? yourResult : 0"></span>
+          </div>
+          <span>:</span>
+          <div [className]="getResultClass(this.rivalResult, this.yourResult)">
+            <span [innerHTML]="rivalResult ? rivalResult : 0"></span>
+          </div>
+        </div>
+        <div class="rival-resut">
+          <p-rating stars="2" [(ngModel)]="rivalResult">
+            <ng-template pTemplate="cancelicon">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="onicon">
+              <img
+                src="../../../assets/images/ping-pong-ball-active.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="officon">
+              <img
+                src="../../../assets/images/ping-pong-ball.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+          </p-rating>
+        </div>
       </div>
+      } @else if (this.balls === 1) {
+      <div class="result">
+        <div class="your-resut">
+          <p-rating stars="1" [(ngModel)]="yourResult">
+            <ng-template pTemplate="cancelicon">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="onicon">
+              <img
+                src="../../../assets/images/ping-pong-ball-active.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="officon">
+              <img
+                src="../../../assets/images/ping-pong-ball.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+          </p-rating>
+        </div>
+        <div class="res">
+          <div [className]="getResultClass(this.yourResult, this.rivalResult)">
+            <span [innerHTML]="yourResult ? yourResult : 0"></span>
+          </div>
+          <span>:</span>
+          <div [className]="getResultClass(this.rivalResult, this.yourResult)">
+            <span [innerHTML]="rivalResult ? rivalResult : 0"></span>
+          </div>
+        </div>
+        <div class="rival-resut">
+          <p-rating stars="1" [(ngModel)]="rivalResult">
+            <ng-template pTemplate="cancelicon">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/rating/cancel.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="onicon">
+              <img
+                src="../../../assets/images/ping-pong-ball-active.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+            <ng-template pTemplate="officon">
+              <img
+                src="../../../assets/images/ping-pong-ball.png"
+                width="25px"
+                height="25px"
+              />
+            </ng-template>
+          </p-rating>
+        </div>
+      </div>
+      } @else { }
     </div>
 
     <div class="preview">
-      @if (yourResult === 3 && rivalResult !== 3) {
+      @if (yourResult === balls && rivalResult !== balls) {
       <div class="win-record"><span>Zwycięstwo</span></div>
-      } @else if (rivalResult === 3 && yourResult !== 3) {
+      } @else if (rivalResult === balls && yourResult !== balls) {
       <div class="lose-record"><span>Porażka</span></div>
       } @else {
       <div></div>
