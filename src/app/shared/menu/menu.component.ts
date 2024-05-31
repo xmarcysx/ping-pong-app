@@ -60,15 +60,16 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private _watchMatches() {
     const userUid = this.authService.currentUser()!.uid;
-    this._subscription.add(
-      this._angularFireDatabase
-        .list(`matches-${userUid}`)
-        .valueChanges()
-        .subscribe((res) => {
-          setTimeout(() => {
-            this._getCurrentUserData();
-          }, 1000);
-        })
-    );
+    if (userUid)
+      this._subscription.add(
+        this._angularFireDatabase
+          .list(`matches-${userUid}`)
+          .valueChanges()
+          .subscribe((res) => {
+            setTimeout(() => {
+              this._getCurrentUserData();
+            }, 1000);
+          })
+      );
   }
 }

@@ -36,9 +36,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   openAddMatchDialog() {
+    const screenWidth = window.innerWidth;
+    const dialogWidth = screenWidth > 992 ? '50vw' : '90vw';
+
     this._dialogSerivce.open(AddMatchComponent, {
       header: 'Dodaj wynik meczu',
-      width: 'auto',
+      width: dialogWidth,
       height: 'auto',
     });
   }
@@ -62,13 +65,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private _watchMatches() {
     this.spinnerService.toTrueInnerSpinner();
     const userUid = this._auth.currentUser()!.uid;
-    this._subscription.add(
-      this._angularFireDatabase
-        .list(`matches-${userUid}`)
-        .valueChanges()
-        .subscribe((res) => {
-          this._getUserMatches();
-        })
-    );
+    if (userUid)
+      this._subscription.add(
+        this._angularFireDatabase
+          .list(`matches-${userUid}`)
+          .valueChanges()
+          .subscribe((res) => {
+            setTimeout(() => {
+              this._getUserMatches();
+            }, 1000);
+          })
+      );
   }
 }

@@ -160,3 +160,11 @@ ul {
 .row {
   --bs-gutter-x: 0 !important;
 }
+
+.dialog-width {
+  width: 50vw;
+
+  @media (max-width: 992px) {
+    width: 90vw;
+  }
+}

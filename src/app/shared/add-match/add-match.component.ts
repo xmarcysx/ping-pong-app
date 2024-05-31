@@ -9,17 +9,35 @@ import { ToastService } from '../../modules/services/toast.service';
 import { Match } from '../../modules/models/match';
 import { AddMatchService } from '../../modules/services/add-match.service';
 import { GetFromFirebaseService } from '../../modules/services/get-from-firebase.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-match',
   standalone: true,
   templateUrl: './add-match.component.html',
   styleUrl: './add-match.component.scss',
-  imports: [FormsModule, DropdownModule, RatingModule, FormSubmitBtnComponent],
+  imports: [
+    FormsModule,
+    DropdownModule,
+    RatingModule,
+    FormSubmitBtnComponent,
+    SelectButtonModule,
+    CommonModule,
+  ],
 })
 export class AddMatchComponent implements OnInit {
+  stateOptions: any[] = [
+    { label: 'Gracz', value: 'normal' },
+    { label: 'Sędzia', value: 'referee' },
+  ];
+  selectValue: string = 'normal';
+
   rivalList: User[] | undefined;
-  rival!: User;
+  playersList: User[] | undefined;
+  rival: User | undefined = undefined;
+  player1: User | undefined = undefined;
+  player2: User | undefined = undefined;
   you!: User | undefined | null;
   yourResult = 0;
   rivalResult = 0;
@@ -47,6 +65,7 @@ export class AddMatchComponent implements OnInit {
   ngOnInit(): void {
     this._getYou();
     this._getRivalList();
+    this._getPlayersList();
   }
 
   getResultClass(yourResult: number, rivalResult: number) {
@@ -67,26 +86,58 @@ export class AddMatchComponent implements OnInit {
     }
   }
 
-  save() {
-    if (
-      this.rival !== undefined &&
-      ((this.rivalResult === this.balls && this.yourResult !== this.balls) ||
-        (this.rivalResult !== this.balls && this.yourResult === this.balls))
-    ) {
-      const objToSave: Match = {
-        youUid: this.you!.uid,
-        rivalUid: this.rival!.uid,
-        yourResult: this.yourResult ? this.yourResult : 0,
-        rivalResult: this.rivalResult ? this.rivalResult : 0,
-        date: new Date(),
-        isApproved: true,
-      };
+  clearValues() {
+    this.yourResult = 0;
+    this.rivalResult = 0;
+    this.rival = undefined;
+    this.player1 = undefined;
+    this.player2 = undefined;
+  }
 
-      this._addMatchService.addMatchToDb(objToSave);
-    } else {
-      this._toastService.error(
-        'Nie podano wszystkich informacji o wyniku spotkania'
-      );
+  save() {
+    if (this.selectValue === 'normal') {
+      if (
+        this.rival !== undefined &&
+        ((this.rivalResult === this.balls && this.yourResult !== this.balls) ||
+          (this.rivalResult !== this.balls && this.yourResult === this.balls))
+      ) {
+        const objToSave: Match = {
+          youUid: this.you!.uid,
+          rivalUid: this.rival!.uid,
+          yourResult: this.yourResult ? this.yourResult : 0,
+          rivalResult: this.rivalResult ? this.rivalResult : 0,
+          date: new Date(),
+          isApproved: true,
+        };
+
+        this._addMatchService.addMatchToDb(objToSave);
+      } else {
+        this._toastService.error(
+          'Nie podano wszystkich informacji o wyniku spotkania'
+        );
+      }
+    }
+
+    if (this.selectValue === 'referee') {
+      if (
+        this.player1 !== undefined &&
+        this.player2 !== undefined &&
+        this.player1.uid !== this.player2.uid &&
+        ((this.rivalResult === this.balls && this.yourResult !== this.balls) ||
+          (this.rivalResult !== this.balls && this.yourResult === this.balls))
+      ) {
+        const objToSave: Match = {
+          youUid: this.player1!.uid,
+          rivalUid: this.player2!.uid,
+          yourResult: this.yourResult ? this.yourResult : 0,
+          rivalResult: this.rivalResult ? this.rivalResult : 0,
+          date: new Date(),
+          isApproved: true,
+        };
+        this._addMatchService.addMatchToDb(objToSave);
+      } else {
+        this._toastService.error('Wystąpił błąd');
+      }
     }
   }
 
@@ -98,6 +149,12 @@ export class AddMatchComponent implements OnInit {
     const currentUserUid = this._authService.currentUser()?.uid;
     this._getFromFirebase.getRivalsList(currentUserUid).subscribe((res) => {
       this.rivalList = res;
+    });
+  }
+
+  private _getPlayersList() {
+    this._getFromFirebase.getAllUsers().subscribe((res) => {
+      this.playersList = res;
     });
   }
 }
