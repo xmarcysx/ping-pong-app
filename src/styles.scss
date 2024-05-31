@@ -138,3 +138,25 @@ ul {
     width: 90% !important;
   }
 }
+
+.p-paginator {
+  background: transparent;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  border: 1px solid rgb(41, 117, 180);
+  border-radius: 30px 30px 30px 30px;
+  background: rgba(41, 90, 180, 0.25);
+  color: white;
+}
+
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last {
+  color: white;
+}
+
+.row {
+  --bs-gutter-x: 0 !important;
+}

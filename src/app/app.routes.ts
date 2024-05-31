@@ -7,6 +7,7 @@ import { MatchesHistoryComponent } from './modules/components/matches-history/ma
 import { DashboardComponent } from './modules/components/dashboard/dashboard.component';
 import { SettingsComponent } from './modules/components/settings/settings.component';
 import { AuthGuard } from './modules/auth/auth.guard';
+import { RankingComponent } from './modules/components/ranking/ranking.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'ustawienia',
         component: SettingsComponent,
+      },
+      {
+        path: 'ranking',
+        component: RankingComponent,
       },
     ],
   },
