@@ -8,6 +8,8 @@ import { DashboardComponent } from './modules/components/dashboard/dashboard.com
 import { SettingsComponent } from './modules/components/settings/settings.component';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { RankingComponent } from './modules/components/ranking/ranking.component';
+import { KingOfTheDayComponent } from './modules/components/king-of-the-day/king-of-the-day.component';
+import { KingOfTheDayAddComponent } from './modules/components/king-of-the-day-add/king-of-the-day-add.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +37,14 @@ export const routes: Routes = [
       {
         path: 'ranking',
         component: RankingComponent,
+      },
+      {
+        path: 'krol-dnia',
+        component: KingOfTheDayComponent,
+      },
+      {
+        path: 'krol-dnia/utworz',
+        component: KingOfTheDayAddComponent,
       },
     ],
   },
