@@ -125,6 +125,7 @@
 
     <ng-template #form>
       <div class="d-flex flex-column gap-5 justify-content-center">
+        @if(!isKingOfTheDayMode) {
         <div class="d-flex justify-content-center">
           <p-dropdown
             class="w-100"
@@ -135,8 +136,7 @@
             placeholder="Wybierz format"
           ></p-dropdown>
         </div>
-
-        @if (this.balls === 3) {
+        } @if (this.balls === 3) {
         <div class="result">
           <div class="your-resut">
             <p-rating stars="3" [(ngModel)]="yourResult">

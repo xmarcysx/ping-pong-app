@@ -1,1 +1,47 @@
-dupa
+<div class="king-content">
+  <div class="header">
+    <div class="title">Utwórz wydarzenie</div>
+  </div>
+
+  <div class="content py-3">
+    <div class="row py-5">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <app-form-submit-btn
+          (btnClicked)="openAddMatchDialog()"
+          title="Dodaj nowy wynik"
+        ></app-form-submit-btn>
+      </div>
+    </div>
+    <!-- <div class="row py-3">
+          <div class="match-list">
+            <div class="title">Twoje ostatnie spotkania</div>
+            @if (spinnerService.showInnerSpinner()) {
+            <div class="inner-spinner-container">
+              <app-racket-animation></app-racket-animation>
+            </div>
+            } @else { @if (matches.length) {
+            <div class="flex flex-column justify-content-center pb-3">
+              <div class="flex justify-content-center align-items-center gap-1">
+                @for (match of matches; track $index) { @if (match.win) {
+                <div class="win-record">
+                  <span>Z</span>
+                </div>
+                } @else {
+                <div class="lose-record">
+                  <span>P</span>
+                </div>
+                } }
+              </div>
+            </div>
+            @for (match of matches; track $index) {
+            <app-match [match]="match"></app-match>
+            } } @else {
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="font-weight-bold text-danger">Brak wyników</div>
+            </div>
+            } }
+          </div>
+        </div>
+      </div> -->
+  </div>
+</div>

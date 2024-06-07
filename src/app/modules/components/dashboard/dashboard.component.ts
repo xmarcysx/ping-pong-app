@@ -43,6 +43,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       header: 'Dodaj wynik meczu',
       width: dialogWidth,
       height: 'auto',
+      data: {
+        isKingOfTheDayMode: false,
+      },
     });
   }
 

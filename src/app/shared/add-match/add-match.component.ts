@@ -11,6 +11,7 @@ import { AddMatchService } from '../../modules/services/add-match.service';
 import { GetFromFirebaseService } from '../../modules/services/get-from-firebase.service';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CommonModule } from '@angular/common';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-add-match',
@@ -39,6 +40,7 @@ export class AddMatchComponent implements OnInit {
   player1: User | undefined = undefined;
   player2: User | undefined = undefined;
   you!: User | undefined | null;
+  isKingOfTheDayMode = false;
   yourResult = 0;
   rivalResult = 0;
   balls = 3;
@@ -59,10 +61,12 @@ export class AddMatchComponent implements OnInit {
     private _authService: AuthService,
     private _getFromFirebase: GetFromFirebaseService,
     private _toastService: ToastService,
-    private _addMatchService: AddMatchService
+    private _addMatchService: AddMatchService,
+    private _dynamicDialogConfig: DynamicDialogConfig
   ) {}
 
   ngOnInit(): void {
+    this._readConfig();
     this._getYou();
     this._getRivalList();
     this._getPlayersList();
@@ -138,6 +142,14 @@ export class AddMatchComponent implements OnInit {
       } else {
         this._toastService.error('Wystąpił błąd');
       }
+    }
+  }
+
+  private _readConfig() {
+    this.isKingOfTheDayMode = this._dynamicDialogConfig.data.isKingOfTheDayMode;
+
+    if (this.isKingOfTheDayMode) {
+      this.balls = 1;
     }
   }
 
