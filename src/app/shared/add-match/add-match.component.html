@@ -1,16 +1,6 @@
 <div class="main pt-3">
   <div class="content">
-    <div class="flex justify-content-center">
-      <p-selectButton
-        [options]="stateOptions"
-        [(ngModel)]="selectValue"
-        (onChange)="clearValues()"
-        optionLabel="label"
-        optionValue="value"
-      />
-    </div>
-
-    @if (selectValue === 'normal') {
+    @if (!isKingOfTheDayMode) {
     <div class="rival">
       <p-dropdown
         [options]="rivalList"
@@ -47,7 +37,7 @@
         </ng-template>
       </p-dropdown>
     </div>
-    } @if (selectValue === 'referee') {
+    } @if (isKingOfTheDayMode) {
     <div class="rival">
       <p-dropdown
         [options]="playersList"
@@ -125,7 +115,6 @@
 
     <ng-template #form>
       <div class="d-flex flex-column gap-5 justify-content-center">
-        @if(!isKingOfTheDayMode) {
         <div class="d-flex justify-content-center">
           <p-dropdown
             class="w-100"
@@ -136,7 +125,8 @@
             placeholder="Wybierz format"
           ></p-dropdown>
         </div>
-        } @if (this.balls === 3) {
+
+        @if (this.balls === 3) {
         <div class="result">
           <div class="your-resut">
             <p-rating stars="3" [(ngModel)]="yourResult">
@@ -341,15 +331,15 @@
     <ng-container *ngTemplateOutlet="form"></ng-container>
 
     <div class="preview">
-      @if (selectValue === 'normal') { @if (yourResult === balls && rivalResult
-      !== balls) {
+      @if (!isKingOfTheDayMode) { @if (yourResult === balls && rivalResult !==
+      balls) {
       <div class="win-record"><span>Zwycięstwo</span></div>
       } @else if (rivalResult === balls && yourResult !== balls) {
       <div class="lose-record"><span>Porażka</span></div>
       } @else {
       <div></div>
-      } } @if (selectValue === 'referee') { @if (yourResult === balls &&
-      rivalResult !== balls) {
+      } } @if (isKingOfTheDayMode) { @if (yourResult === balls && rivalResult
+      !== balls) {
       <div class="win-record">
         <span>{{ this.player1?.username }}</span>
       </div>

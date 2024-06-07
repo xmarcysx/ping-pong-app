@@ -11,6 +11,13 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 })
 export class MatchComponent {
   @Input() match!: Match;
+  @Input() kingOfTheDay = false;
 
-  openRivalDataDialog() {}
+  getBackground() {
+    if (this.kingOfTheDay) {
+      return 'match-undefined';
+    } else {
+      return this.match!.win ? 'match-win' : 'match-lose';
+    }
+  }
 }

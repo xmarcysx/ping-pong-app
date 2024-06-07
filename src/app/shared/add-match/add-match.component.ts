@@ -11,7 +11,11 @@ import { AddMatchService } from '../../modules/services/add-match.service';
 import { GetFromFirebaseService } from '../../modules/services/get-from-firebase.service';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CommonModule } from '@angular/common';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import {
+  DialogService,
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-add-match',
@@ -28,12 +32,6 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
   ],
 })
 export class AddMatchComponent implements OnInit {
-  stateOptions: any[] = [
-    { label: 'Gracz', value: 'normal' },
-    { label: 'Sędzia', value: 'referee' },
-  ];
-  selectValue: string = 'normal';
-
   rivalList: User[] | undefined;
   playersList: User[] | undefined;
   rival: User | undefined = undefined;
@@ -60,6 +58,7 @@ export class AddMatchComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _getFromFirebase: GetFromFirebaseService,
+    private _dynamicDialogRef: DynamicDialogRef,
     private _toastService: ToastService,
     private _addMatchService: AddMatchService,
     private _dynamicDialogConfig: DynamicDialogConfig
@@ -99,7 +98,7 @@ export class AddMatchComponent implements OnInit {
   }
 
   save() {
-    if (this.selectValue === 'normal') {
+    if (!this.isKingOfTheDayMode) {
       if (
         this.rival !== undefined &&
         ((this.rivalResult === this.balls && this.yourResult !== this.balls) ||
@@ -113,7 +112,6 @@ export class AddMatchComponent implements OnInit {
           date: new Date(),
           isApproved: true,
         };
-
         this._addMatchService.addMatchToDb(objToSave);
       } else {
         this._toastService.error(
@@ -122,7 +120,7 @@ export class AddMatchComponent implements OnInit {
       }
     }
 
-    if (this.selectValue === 'referee') {
+    if (this.isKingOfTheDayMode) {
       if (
         this.player1 !== undefined &&
         this.player2 !== undefined &&
@@ -131,14 +129,16 @@ export class AddMatchComponent implements OnInit {
           (this.rivalResult !== this.balls && this.yourResult === this.balls))
       ) {
         const objToSave: Match = {
+          you: this.player1,
           youUid: this.player1!.uid,
+          rival: this.player2,
           rivalUid: this.player2!.uid,
           yourResult: this.yourResult ? this.yourResult : 0,
           rivalResult: this.rivalResult ? this.rivalResult : 0,
           date: new Date(),
           isApproved: true,
         };
-        this._addMatchService.addMatchToDb(objToSave);
+        this._dynamicDialogRef.close(objToSave);
       } else {
         this._toastService.error('Wystąpił błąd');
       }
@@ -149,7 +149,8 @@ export class AddMatchComponent implements OnInit {
     this.isKingOfTheDayMode = this._dynamicDialogConfig.data.isKingOfTheDayMode;
 
     if (this.isKingOfTheDayMode) {
-      this.balls = 1;
+      (this.format = { sets: 1, label: 'Do 1 wygranej setów' }),
+        (this.balls = 1);
     }
   }
 

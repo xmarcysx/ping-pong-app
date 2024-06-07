@@ -195,6 +195,102 @@
       }
     }
   }
+
+  .match-undefined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    border: 1px solid rgb(41, 117, 180);
+    border-radius: 30px 30px 30px 30px;
+    background: rgba(41, 90, 180, 0.25);
+
+    .player {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      .player-logo {
+        width: 10%;
+        img {
+          border-radius: 50%;
+          height: 57px;
+          width: 57px;
+          object-fit: cover;
+        }
+      }
+
+      .player-name {
+        text-align: center;
+        width: 80%;
+        font-size: 1rem;
+      }
+    }
+
+    .rival {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+
+      @media (max-width: 992px) {
+        justify-content: end;
+      }
+      .rival-name {
+        text-align: center;
+        width: 80%;
+        font-size: 1rem;
+      }
+
+      .rival-logo {
+        display: flex;
+        justify-content: end;
+        width: 20%;
+
+        img {
+          border-radius: 50%;
+          height: 57px;
+          width: 57px;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .result {
+      padding: 0.25rem;
+      .lose-record {
+        background-color: rgb(221, 30, 30);
+        font-size: 1.125rem;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          font-size: 1.5rem;
+        }
+      }
+
+      .win-record {
+        background-color: rgb(41, 180, 41);
+        width: 2rem;
+        font-size: 1.125rem;
+        height: 2rem;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
 }
 
 .nav-header {
