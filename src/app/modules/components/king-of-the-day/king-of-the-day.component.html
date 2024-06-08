@@ -12,35 +12,80 @@
         ></app-form-submit-btn>
       </div>
     </div>
-    <!-- <div class="row py-3">
-        <div class="match-list">
-          <div class="title">Twoje ostatnie spotkania</div>
-          @if (spinnerService.showInnerSpinner()) {
-          <div class="inner-spinner-container">
-            <app-racket-animation></app-racket-animation>
-          </div>
-          } @else { @if (matches.length) {
-          <div class="flex flex-column justify-content-center pb-3">
-            <div class="flex justify-content-center align-items-center gap-1">
-              @for (match of matches; track $index) { @if (match.win) {
-              <div class="win-record">
-                <span>Z</span>
+    <div class="row py-5">
+      <div class="players-list">
+        @for (player of players; track $index) {
+        <div class="content">
+          <div [className]="$index + 1 === 1 ? 'match-gold' : 'match-average'">
+            <div class="player">
+              <div class="player-position">
+                <span>{{ $index + 1 }}</span>
               </div>
-              } @else {
-              <div class="lose-record">
-                <span>P</span>
+              <div class="player-logo">
+                <img
+                  (click)="youDataPanel.toggle($event)"
+                  [src]="
+                    player.profileImg === undefined
+                      ? '../../../../assets/images/profile.png'
+                      : player.profileImg
+                  "
+                  alt="logo"
+                />
+                <p-overlayPanel #youDataPanel>
+                  <div class="nav-header">
+                    <div class="flex flex-column justify-content-center">
+                      <div class="p-3 flex justify-content-center">
+                        <img
+                          [src]="
+                            player?.profileImg === undefined
+                              ? '../../../assets/images/profile.png'
+                              : player?.profileImg
+                          "
+                          alt="logo"
+                        />
+                      </div>
+                      <p class="username text-center">
+                        {{ player?.username }}
+                      </p>
+                    </div>
+
+                    <div class="flex flex-column justify-content-center pb-3">
+                      <div
+                        class="flex justify-content-center align-items-center gap-1"
+                      >
+                        <div class="win-record">
+                          <span> {{ player?.wins }} </span>
+                        </div>
+                        <div class="lose-record">
+                          <span>{{ player?.loses }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </p-overlayPanel>
               </div>
-              } }
+              <div class="player-name d-none d-lg-block">
+                {{ player.username }}
+              </div>
+              <div class="result">
+                <div class="flex justify-content-end align-items-center px-5">
+                  <div class="win-record">
+                    <span>{{ player.kingOfTheDayWins }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          @for (match of matches; track $index) {
-          <app-match [match]="match"></app-match>
-          } } @else {
-          <div class="d-flex justify-content-center align-items-center">
-            <div class="font-weight-bold text-danger">Brak wyników</div>
-          </div>
-          } }
         </div>
+        }
+      </div>
+    </div>
+    <!-- <div class="row py-5">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <app-form-submit-btn
+          (btnClicked)="matchesHistory()"
+          title="Historia spotkań"
+        ></app-form-submit-btn>
       </div>
     </div> -->
   </div>

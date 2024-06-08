@@ -52,6 +52,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             loses: res?.loses!,
             wins: res?.wins!,
             uid: res?.uid!,
+            kingOfTheDayWins: res?.kingOfTheDayWins!,
           });
         });
       }
