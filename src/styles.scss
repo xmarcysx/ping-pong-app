@@ -157,6 +157,23 @@ ul {
   color: white;
 }
 
+.p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
+  border-radius: 50%;
+  background: white;
+  color: rgb(41, 117, 180);
+  border: 1px solid rgb(41, 117, 180);
+}
+
+.p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover {
+  border-radius: 50%;
+  background: white;
+  color: rgb(41, 117, 180);
+  border: 1px solid rgb(41, 117, 180);
+}
+
 .row {
   --bs-gutter-x: 0 !important;
 }

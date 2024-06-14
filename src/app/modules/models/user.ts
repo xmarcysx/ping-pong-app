@@ -7,4 +7,5 @@ export interface User {
   uid: string;
   email?: string;
   matches?: [];
+  kingOfTheDayCoutWins?: number;
 }

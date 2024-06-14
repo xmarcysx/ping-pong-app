@@ -1,0 +1,68 @@
+<div class="row py-5">
+  <div class="players-list">
+    @for (player of players; track $index) {
+    <div class="content">
+      <div [className]="$index + 1 === 1 ? 'match-gold' : 'match-average'">
+        <div class="player">
+          <div class="player-position">
+            <span>{{ $index + 1 }}</span>
+          </div>
+          <div class="player-logo">
+            <img
+              (click)="youDataPanel.toggle($event)"
+              [src]="
+                player.profileImg === undefined
+                  ? '../../../../assets/images/profile.png'
+                  : player.profileImg
+              "
+              alt="logo"
+            />
+            <p-overlayPanel #youDataPanel>
+              <div class="nav-header">
+                <div class="flex flex-column justify-content-center">
+                  <div class="p-3 flex justify-content-center">
+                    <img
+                      [src]="
+                        player?.profileImg === undefined
+                          ? '../../../assets/images/profile.png'
+                          : player?.profileImg
+                      "
+                      alt="logo"
+                    />
+                  </div>
+                  <p class="username text-center">
+                    {{ player?.username }}
+                  </p>
+                </div>
+
+                <div class="flex flex-column justify-content-center pb-3">
+                  <div
+                    class="flex justify-content-center align-items-center gap-1"
+                  >
+                    <div class="win-record">
+                      <span> {{ player?.wins }} </span>
+                    </div>
+                    <div class="lose-record">
+                      <span>{{ player?.loses }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-overlayPanel>
+          </div>
+          <div class="player-name d-none d-lg-block">
+            {{ player.username }}
+          </div>
+          <div class="result">
+            <div class="flex justify-content-end align-items-center px-5">
+              <div class="win-record">
+                <span>{{ player.kingOfTheDayCoutWins }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

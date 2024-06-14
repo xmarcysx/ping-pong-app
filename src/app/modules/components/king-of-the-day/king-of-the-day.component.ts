@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { GetFromFirebaseService } from '../../services/get-from-firebase.service';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-
 @Component({
   selector: 'app-king-of-the-day',
   standalone: true,
@@ -31,6 +30,4 @@ export class KingOfTheDayComponent implements OnInit {
   addKingOfTheDay() {
     this._router.navigateByUrl('/krol-dnia/utworz');
   }
-
-  matchesHistory() {}
 }
