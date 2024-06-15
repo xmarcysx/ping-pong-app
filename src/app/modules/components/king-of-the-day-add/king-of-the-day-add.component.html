@@ -15,7 +15,11 @@
     <div class="row py-3">
       <div class="match-list">
         @for (match of matchesList; track $index) {
-        <app-match [kingOfTheDay]="true" [match]="match"></app-match>
+        <app-match
+          (removeEventEmitter)="removeMatch($index)"
+          [kingOfTheDay]="true"
+          [match]="match"
+        ></app-match>
         }@if (matches.length > 5) {
         <p-paginator
           (onPageChange)="onPageChange($event)"
@@ -31,7 +35,7 @@
       <div class="col-lg-12 d-flex justify-content-center gap-3">
         <app-form-submit-btn
           (btnClicked)="openKingOfTheDayLive()"
-          title="Tabela na żywo"
+          title="Tabela"
         ></app-form-submit-btn>
         <app-form-submit-btn
           (btnClicked)="saveKingOfTheDay()"

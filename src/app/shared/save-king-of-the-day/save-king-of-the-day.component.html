@@ -1,1 +1,48 @@
-<p>save-king-of-the-day works!</p>
+<div class="row py-5">
+  <div class="players-list">
+    <div class="player-name-title">Król dnia</div>
+    @for (player of players; track $index) {
+    <div class="content">
+      <div [className]="'match-gold'">
+        <div class="player">
+          <div class="player-position">
+            <span>{{ $index + 1 }}</span>
+          </div>
+          <div class="player-logo">
+            <img
+              [src]="
+                player.profileImg === undefined
+                  ? '../../../../assets/images/profile.png'
+                  : player.profileImg
+              "
+              alt="logo"
+            />
+          </div>
+          <div class="player-name d-none d-lg-block">
+            {{ player.username }}
+          </div>
+          <div class="result">
+            <div class="flex justify-content-end align-items-center px-5">
+              <div class="win-record">
+                <span>{{ player.kingOfTheDayCoutWins }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    <div class="flex flex-column justify-content-center mt-3">
+      <div class="flex justify-content-center align-items-center gap-3">
+        <app-form-submit-btn
+          (btnClicked)="close()"
+          title="Zamknij"
+        ></app-form-submit-btn>
+        <app-form-submit-btn
+          (btnClicked)="save()"
+          title="Zapisz"
+        ></app-form-submit-btn>
+      </div>
+    </div>
+  </div>
+</div>

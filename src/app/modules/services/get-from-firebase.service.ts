@@ -112,6 +112,18 @@ export class GetFromFirebaseService {
     });
   }
 
+  updateUserKingOfTheDay(user: User) {
+    this.getUserKey(user.uid).subscribe((res) => {
+      this._http
+        .patch(this.db + `/users/${res}.json`, {
+          kingOfTheDayWins: user.kingOfTheDayWins + 1,
+        })
+        .subscribe((res) => {
+          this._spinnerService.toFalse();
+        });
+    });
+  }
+
   updateUserMatchesResult(
     userUid: string,
     userKey: string,

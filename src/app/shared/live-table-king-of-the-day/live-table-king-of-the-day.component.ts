@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormSubmitBtnComponent } from '../form-submit-btn/form-submit-btn.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { User } from '../../modules/models/user';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Match } from '../../modules/models/match';
 
 @Component({
@@ -15,10 +15,17 @@ import { Match } from '../../modules/models/match';
 export class LiveTableKingOfTheDayComponent implements OnInit {
   players: User[] | undefined = [];
 
-  constructor(private _dynamicDialogConfig: DynamicDialogConfig) {}
+  constructor(
+    private _dynamicDialogConfig: DynamicDialogConfig,
+    private _dynamicDialogRef: DynamicDialogRef
+  ) {}
 
   ngOnInit() {
     this._readConfig();
+  }
+
+  close() {
+    this._dynamicDialogRef.close();
   }
 
   private _readConfig() {

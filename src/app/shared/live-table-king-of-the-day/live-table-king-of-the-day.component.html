@@ -9,7 +9,6 @@
           </div>
           <div class="player-logo">
             <img
-              (click)="youDataPanel.toggle($event)"
               [src]="
                 player.profileImg === undefined
                   ? '../../../../assets/images/profile.png'
@@ -17,38 +16,6 @@
               "
               alt="logo"
             />
-            <p-overlayPanel #youDataPanel>
-              <div class="nav-header">
-                <div class="flex flex-column justify-content-center">
-                  <div class="p-3 flex justify-content-center">
-                    <img
-                      [src]="
-                        player?.profileImg === undefined
-                          ? '../../../assets/images/profile.png'
-                          : player?.profileImg
-                      "
-                      alt="logo"
-                    />
-                  </div>
-                  <p class="username text-center">
-                    {{ player?.username }}
-                  </p>
-                </div>
-
-                <div class="flex flex-column justify-content-center pb-3">
-                  <div
-                    class="flex justify-content-center align-items-center gap-1"
-                  >
-                    <div class="win-record">
-                      <span> {{ player?.wins }} </span>
-                    </div>
-                    <div class="lose-record">
-                      <span>{{ player?.loses }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </p-overlayPanel>
           </div>
           <div class="player-name d-none d-lg-block">
             {{ player.username }}
@@ -64,5 +31,13 @@
       </div>
     </div>
     }
+    <div class="flex flex-column justify-content-center mt-3">
+      <div class="flex justify-content-center align-items-center">
+        <app-form-submit-btn
+          (btnClicked)="close()"
+          title="Zamknij"
+        ></app-form-submit-btn>
+      </div>
+    </div>
   </div>
 </div>

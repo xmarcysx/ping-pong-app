@@ -7,6 +7,7 @@ import { MatchComponent } from '../../../shared/match/match.component';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { LiveTableKingOfTheDayComponent } from '../../../shared/live-table-king-of-the-day/live-table-king-of-the-day.component';
 import { User } from '../../models/user';
+import { SaveKingOfTheDayComponent } from '../../../shared/save-king-of-the-day/save-king-of-the-day.component';
 
 @Component({
   selector: 'app-king-of-the-day-add',
@@ -72,9 +73,23 @@ export class KingOfTheDayAddComponent {
     });
   }
 
+  removeMatch(index: number) {
+    this.matches.splice(index, 1);
+    this.matchesList = this.matches.slice(0, 5);
+  }
+
   saveKingOfTheDay() {
-    // Przekazać topPlayers do komponentu tam wyświetlić i zrobić anuluj zapisz
-    // Dodać przycisk zamknij do tabeli
+    const screenWidth = window.innerWidth;
+    const dialogWidth = screenWidth > 992 ? '50vw' : '90vw';
+
+    this.dialog = this._dialogSerivce.open(SaveKingOfTheDayComponent, {
+      header: 'Zakończ wydarzenie',
+      width: dialogWidth,
+      height: 'auto',
+      data: {
+        winners: this._getTopPlayers(),
+      },
+    });
   }
 
   private _getPlayersList(): User[] {

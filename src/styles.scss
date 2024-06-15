@@ -185,3 +185,19 @@ ul {
     width: 90vw;
   }
 }
+
+.pi-red {
+  display: flex;
+  align-items: center;
+  color: red;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0 0.25rem;
+}
+
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled) {
+  color: white;
+}

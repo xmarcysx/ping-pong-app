@@ -1,0 +1,202 @@
+.players-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  color: white;
+
+  .player-name-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .match-gold {
+      display: flex;
+      align-items: center;
+      width: 75%;
+      border: 1px solid rgb(180, 155, 41);
+      border-radius: 30px 30px 30px 30px;
+      background: rgba(180, 166, 41, 0.596);
+
+      .player {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .player-position {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 10%;
+          span {
+            font-size: 1.25rem;
+          }
+        }
+
+        .player-logo {
+          width: 10%;
+          img {
+            border-radius: 50%;
+            height: 57px;
+            width: 57px;
+            object-fit: cover;
+          }
+        }
+
+        .player-name {
+          text-align: left;
+          width: 50%;
+          font-size: 1rem;
+        }
+
+        .result {
+          width: 30%;
+          padding: 0.25rem;
+          .lose-record {
+            background-color: rgb(221, 30, 30);
+            font-size: 1.125rem;
+            font-weight: bold;
+            border-radius: 0.25rem;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span {
+              font-size: 1.5rem;
+            }
+          }
+
+          .win-record {
+            background-color: rgb(41, 180, 41);
+            width: 2rem;
+            font-size: 1.125rem;
+            height: 2rem;
+            font-weight: bold;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span {
+              font-size: 1.5rem;
+            }
+          }
+
+          .win-ratio {
+            width: 50px;
+          }
+
+          @media (max-width: 992px) {
+            display: flex;
+            justify-content: end;
+            width: 80%;
+          }
+        }
+        @media (max-width: 992px) {
+          justify-content: space-between;
+        }
+      }
+    }
+
+    .match-average {
+      display: flex;
+      align-items: center;
+      width: 75%;
+      border: 1px solid rgb(41, 117, 180);
+      border-radius: 30px 30px 30px 30px;
+      background: rgba(41, 90, 180, 0.25);
+
+      .player {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .player-position {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 10%;
+          span {
+            font-size: 1.25rem;
+          }
+        }
+
+        .player-logo {
+          width: 10%;
+          img {
+            border-radius: 50%;
+            height: 57px;
+            width: 57px;
+            object-fit: cover;
+          }
+        }
+
+        .player-name {
+          text-align: left;
+          width: 50%;
+          font-size: 1rem;
+        }
+
+        .result {
+          width: 30%;
+          padding: 0.25rem;
+          .lose-record {
+            background-color: rgb(221, 30, 30);
+            font-size: 1.125rem;
+            font-weight: bold;
+            border-radius: 0.25rem;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span {
+              font-size: 1.5rem;
+            }
+          }
+
+          .win-record {
+            background-color: rgb(41, 180, 41);
+            width: 2rem;
+            font-size: 1.125rem;
+            height: 2rem;
+            font-weight: bold;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span {
+              font-size: 1.5rem;
+            }
+          }
+
+          .win-ratio {
+            width: 50px;
+          }
+
+          @media (max-width: 992px) {
+            display: flex;
+            justify-content: end;
+            width: 80%;
+          }
+        }
+        @media (max-width: 992px) {
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+}

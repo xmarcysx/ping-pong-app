@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Match } from '../../modules/models/match';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
@@ -10,6 +10,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
   styleUrl: './match.component.scss',
 })
 export class MatchComponent {
+  @Output() removeEventEmitter = new EventEmitter();
   @Input() match!: Match;
   @Input() kingOfTheDay = false;
 
