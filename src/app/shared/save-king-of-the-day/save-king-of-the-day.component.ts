@@ -6,6 +6,7 @@ import { ToastService } from '../../modules/services/toast.service';
 import { GetFromFirebaseService } from '../../modules/services/get-from-firebase.service';
 import { SpinnerService } from '../../modules/services/spinner.service';
 import { Router } from '@angular/router';
+import { Match } from '../../modules/models/match';
 
 @Component({
   selector: 'app-save-king-of-the-day',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class SaveKingOfTheDayComponent {
   players: User[] | undefined = [];
+  matches: Match[] = [];
 
   constructor(
     private _dynamicDialogConfig: DynamicDialogConfig,
@@ -39,6 +41,7 @@ export class SaveKingOfTheDayComponent {
       this._dynamicDialogRef.close();
       this._spinnerService.toTrue();
       this._getFromFirebaseService.updateUserKingOfTheDay(this.players[0]);
+      this._getFromFirebaseService.saveKingOfTheDay(this.matches);
       this._router.navigateByUrl('/krol-dnia');
     } else {
       this._toastService.error('Brak rozstrzygnięcia. Król jest tylko jeden.');
@@ -47,5 +50,6 @@ export class SaveKingOfTheDayComponent {
 
   private _readConfig() {
     this.players = this._dynamicDialogConfig.data.winners;
+    this.matches = this._dynamicDialogConfig.data.matches;
   }
 }

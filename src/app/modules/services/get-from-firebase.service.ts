@@ -124,6 +124,10 @@ export class GetFromFirebaseService {
     });
   }
 
+  saveKingOfTheDay(matches: Match[]) {
+    this._http.post(this.db + `/kingOfTheDayMatches.json`, matches).subscribe();
+  }
+
   updateUserMatchesResult(
     userUid: string,
     userKey: string,

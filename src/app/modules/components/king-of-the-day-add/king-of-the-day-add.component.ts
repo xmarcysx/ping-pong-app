@@ -88,6 +88,7 @@ export class KingOfTheDayAddComponent {
       height: 'auto',
       data: {
         winners: this._getTopPlayers(),
+        matches: this.matches,
       },
     });
   }
