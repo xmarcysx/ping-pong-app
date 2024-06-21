@@ -24,8 +24,13 @@ export class AddMatchService {
     const yourResult = addMatchObject.yourResult;
     const rivalResult = addMatchObject.rivalResult;
 
-    this._updateUserMatchesData(currentUserUid!, yourResult, addMatchObject);
-    this._updateUserMatchesData(rivalUserUid!, rivalResult, {
+    this._updateUserMatchesData(
+      currentUserUid!,
+      yourResult,
+      rivalResult,
+      addMatchObject
+    );
+    this._updateUserMatchesData(rivalUserUid!, rivalResult, yourResult, {
       ...addMatchObject,
       youUid: rivalUserUid,
       yourResult: rivalResult,
@@ -37,26 +42,31 @@ export class AddMatchService {
   private _updateUserMatchesData(
     userUid: string,
     userResult: number,
+    rivalResult: number,
     addMatchObject: Match
   ) {
     this._getFromFirebaseService.getUserKey(userUid).subscribe((userKey) => {
       this._http
         .post(this.db + `/matches-${userUid}.json`, {
           ...addMatchObject,
-          win: this._isMatchWin(userResult),
+          win: this._isMatchWin(userResult, rivalResult),
         })
         .subscribe((res) => {
           this._getFromFirebaseService.updateUserMatchesResult(
             userUid,
             userKey!,
-            this._isMatchWin(userResult)
+            this._isMatchWin(userResult, rivalResult)
           );
         });
     });
   }
 
-  private _isMatchWin(userResult: number): boolean {
-    return userResult === 3 ? true : false;
+  private _isMatchWin(userResult: number, rivalResult: number): boolean {
+    if (userResult > rivalResult) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private _closeDialog() {

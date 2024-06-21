@@ -116,7 +116,7 @@ export class AddMatchComponent implements OnInit {
           yourResult: this.yourResult ? this.yourResult : 0,
           rivalResult: this.rivalResult ? this.rivalResult : 0,
           date: new Date(),
-          win: this._isMatchWin(this.yourResult),
+          win: this._isMatchWin(this.yourResult, this.rivalResult),
           isApproved: true,
         };
         this._store.dispatch(addNewMatchSuccess({ match: objToSave }));
@@ -153,8 +153,12 @@ export class AddMatchComponent implements OnInit {
     }
   }
 
-  private _isMatchWin(userResult: number): boolean {
-    return userResult === 3 ? true : false;
+  private _isMatchWin(userResult: number, rivalResult: number): boolean {
+    if (userResult > rivalResult) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private _readConfig() {

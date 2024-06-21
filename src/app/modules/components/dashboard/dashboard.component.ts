@@ -67,8 +67,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const userUid = this._auth.currentUser()!.uid;
 
     this._store.select(selectMatches).subscribe((res) => {
-      console.log(res);
-
       if (!res.loading) {
         this.spinnerService.toFalseInnerSpinner();
         this.matches = res.matches;
