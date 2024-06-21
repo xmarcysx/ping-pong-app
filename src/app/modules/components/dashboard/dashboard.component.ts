@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatchComponent } from '../../../shared/match/match.component';
 import { FormSubmitBtnComponent } from '../../../shared/form-submit-btn/form-submit-btn.component';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { AddMatchComponent } from '../../../shared/add-match/add-match.component';
 import { AuthService } from '../../services/auth.service';
 import { Match } from '../../models/match';
@@ -10,7 +10,10 @@ import { RacketAnimationComponent } from '../../../shared/racket-animation/racke
 import { SpinnerService } from '../../services/spinner.service';
 import { Subscription } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { ToastService } from '../../services/toast.service';
+import { Store, select } from '@ngrx/store';
+import { loadUserMatches } from '../../store/dashboard/dashboard.actions';
+import { AppState } from '../../store/store';
+import { selectMatches } from '../../store/dashboard/dashboard.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,10 +31,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private _angularFireDatabase: AngularFireDatabase,
     private _dialogSerivce: DialogService,
     private _getFromFirbaseService: GetFromFirebaseService,
+    private _store: Store<AppState>,
     private _auth: AuthService
   ) {}
 
   ngOnInit(): void {
+    this._store.select(selectMatches).subscribe((res) => {
+      if (!res.loading) {
+        this.spinnerService.toFalseInnerSpinner();
+        this.matches = res.matches;
+      }
+    });
     this._watchMatches();
   }
 
@@ -55,20 +65,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private _getUserMatches() {
     const userUid = this._auth.currentUser()!.uid;
-    if (userUid) {
-      this._getFromFirbaseService.getUserMatches(userUid).subscribe((res) => {
+
+    this._store.select(selectMatches).subscribe((res) => {
+      console.log(res);
+
+      if (!res.loading) {
         this.spinnerService.toFalseInnerSpinner();
-        this.matches = res;
-      });
+        this.matches = res.matches;
+      }
+    });
+
+    if (userUid && !this.matches.length) {
+      this._store.dispatch(loadUserMatches({ userId: userUid }));
+      // this._getFromFirbaseService.getUserMatches(userUid).subscribe((res) => {
+      //   this.spinnerService.toFalseInnerSpinner();
+      //   this.matches = res;
+      // });
     } else {
       this.spinnerService.toFalseInnerSpinner();
     }
   }
 
   private _watchMatches() {
-    this.spinnerService.toTrueInnerSpinner();
     const userUid = this._auth.currentUser()!.uid;
-    if (userUid)
+    if (userUid && !this.matches.length) {
+      this.spinnerService.toTrueInnerSpinner();
       this._subscription.add(
         this._angularFireDatabase
           .list(`matches-${userUid}`)
@@ -79,5 +100,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
             }, 1000);
           })
       );
+    }
   }
 }

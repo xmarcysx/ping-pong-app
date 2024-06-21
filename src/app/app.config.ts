@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -7,10 +11,16 @@ import { provideHttpClient } from '@angular/common/http';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireModule } from '@angular/fire/compat';
+import { provideState, provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './modules/store/dashboard/dashboard.effects';
+import {
+  authFeatureKey,
+  authReducer,
+} from './modules/store/dashboard/dashboard.reducer';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyBnFDVY292hPJ-J63CFROOSRWuGc6M3IAs',
@@ -25,11 +35,21 @@ export const firebaseConfig = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideStore(),
+    provideState(authFeatureKey, authReducer),
+    provideStoreDevtools({
+      maxAge: 25,
+      autoPause: true,
+      trace: false,
+      traceLimit: 75,
+      logOnly: !isDevMode(),
+    }),
     provideHttpClient(),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(firebaseConfig)),
       provideAuth(() => getAuth()),
       provideFirestore(() => getFirestore()),
+      EffectsModule.forRoot([UserEffects]),
       BrowserAnimationsModule,
     ]),
     MessageService,

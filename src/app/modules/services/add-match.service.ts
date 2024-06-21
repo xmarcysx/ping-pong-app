@@ -18,7 +18,6 @@ export class AddMatchService {
   ) {}
 
   addMatchToDb(addMatchObject: Match) {
-    this._spinnerService.toTrue();
     this._closeDialog();
     const currentUserUid = addMatchObject.youUid;
     const rivalUserUid = addMatchObject.rivalUid;

@@ -16,6 +16,9 @@ import {
   DynamicDialogConfig,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../modules/store/store';
+import { addNewMatchSuccess } from '../../modules/store/dashboard/dashboard.actions';
 
 @Component({
   selector: 'app-add-match',
@@ -61,6 +64,7 @@ export class AddMatchComponent implements OnInit {
     private _dynamicDialogRef: DynamicDialogRef,
     private _toastService: ToastService,
     private _addMatchService: AddMatchService,
+    private _store: Store<AppState>,
     private _dynamicDialogConfig: DynamicDialogConfig
   ) {}
 
@@ -105,14 +109,18 @@ export class AddMatchComponent implements OnInit {
           (this.rivalResult !== this.balls && this.yourResult === this.balls))
       ) {
         const objToSave: Match = {
+          you: this.you!,
+          rival: this.rival,
           youUid: this.you!.uid,
           rivalUid: this.rival!.uid,
           yourResult: this.yourResult ? this.yourResult : 0,
           rivalResult: this.rivalResult ? this.rivalResult : 0,
           date: new Date(),
+          win: this._isMatchWin(this.yourResult),
           isApproved: true,
         };
-        this._addMatchService.addMatchToDb(objToSave);
+        this._store.dispatch(addNewMatchSuccess({ match: objToSave }));
+        // this._addMatchService.addMatchToDb(objToSave);
       } else {
         this._toastService.error(
           'Nie podano wszystkich informacji o wyniku spotkania'
@@ -143,6 +151,10 @@ export class AddMatchComponent implements OnInit {
         this._toastService.error('Wystąpił błąd');
       }
     }
+  }
+
+  private _isMatchWin(userResult: number): boolean {
+    return userResult === 3 ? true : false;
   }
 
   private _readConfig() {
