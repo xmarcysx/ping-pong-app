@@ -2,6 +2,8 @@
 
 Witaj w aplikacji Ping Pong, prostym narzędziu internetowym zaprojektowanym do śledzenia wyników meczów ping ponga w Twojej społeczności graczy. Aplikacja umożliwia użytkownikom rejestrowanie wyników swoich meczów i przeglądanie aktualnych statystyk w społeczności.
 
+<img src="src/assets/images/init.png"/>
+
 ## Funkcje
 
 - **Rejestrowanie Wyników Meczów**: Użytkownicy mogą zalogować się do aplikacji i rejestrować wyniki swoich meczów ping ponga, włączając w to wyniki poszczególnych gier.
