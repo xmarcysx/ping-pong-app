@@ -201,3 +201,79 @@ button:not(:disabled),
 [type="submit"]:not(:disabled) {
   color: white;
 }
+@media (min-width: 768px) {
+  .flex-md-row {
+    flex-direction: row !important;
+  }
+}
+
+app-king-of-the-day-winner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .p-paginator-first,
+  .p-paginator-last,
+  .win-ratio {
+    display: none;
+  }
+
+  .player {
+    .result {
+      padding: 0 1rem !important;
+    }
+  }
+}
+
+.nav-header {
+  color: white;
+
+  img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .username {
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+  .lose-record {
+    background-color: rgb(221, 30, 30);
+    font-weight: bold;
+    border-radius: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 1.5rem;
+    }
+  }
+
+  .win-record {
+    background-color: rgb(41, 180, 41);
+    width: 2rem;
+    height: 2rem;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+app-king-of-the-day-history,
+app-matches-history,
+app-ranking,
+app-king-of-the-day {
+  height: 100%;
+}

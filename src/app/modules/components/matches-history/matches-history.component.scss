@@ -1,4 +1,10 @@
 .matches-content {
+  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+
   .header {
     display: flex;
     justify-content: center;
@@ -12,6 +18,8 @@
   }
 
   .content {
+    height: 100%;
+
     .match-list {
       width: 100%;
       display: flex;

@@ -10,6 +10,7 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { RankingComponent } from './modules/components/ranking/ranking.component';
 import { KingOfTheDayComponent } from './modules/components/king-of-the-day/king-of-the-day.component';
 import { KingOfTheDayAddComponent } from './modules/components/king-of-the-day-add/king-of-the-day-add.component';
+import { KingOfTheDayHistoryComponent } from './modules/components/king-of-the-day-history/king-of-the-day-history.component';
 
 export const routes: Routes = [
   {
@@ -45,6 +46,10 @@ export const routes: Routes = [
       {
         path: 'krol-dnia/utworz',
         component: KingOfTheDayAddComponent,
+      },
+      {
+        path: 'krol-dnia/historia',
+        component: KingOfTheDayHistoryComponent,
       },
     ],
   },

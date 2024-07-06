@@ -128,6 +128,46 @@ export class GetFromFirebaseService {
     this._http.post(this.db + `/kingOfTheDayMatches.json`, matches).subscribe();
   }
 
+  findUserByEmail(user: User, users: User[]): User | undefined {
+    return users.find((userFromList) => userFromList.email === user.email);
+  }
+
+  getKingOfTheDayHistory() {
+    this._spinnerService.toFalse();
+    return this._http.get(this.db + `/kingOfTheDayMatches.json`).pipe(
+      map((history) => {
+        if (!history) {
+          return [];
+        }
+
+        const historyArray = Object.values(history);
+        historyArray.map((matchArray) => {
+          return matchArray.map((match: Match) => {
+            const updatedRival = this.findUserByEmail(
+              match.rival as User,
+              this.users() as User[]
+            );
+            const updatedYou = this.findUserByEmail(
+              match.you as User,
+              this.users() as User[]
+            );
+
+            if (updatedRival) {
+              match.rival = updatedRival;
+            }
+
+            if (updatedYou) {
+              match.you = updatedYou;
+            }
+
+            return match;
+          });
+        });
+        return historyArray;
+      })
+    );
+  }
+
   updateUserMatchesResult(
     userUid: string,
     userKey: string,
@@ -219,7 +259,7 @@ export class GetFromFirebaseService {
             updatedMatches.forEach((updatedMatch, index) => {
               sortedMatches[index].rival = updatedMatch.rival;
             });
-            return sortedMatches.slice(0, 5);
+            return sortedMatches;
           })
         );
       })

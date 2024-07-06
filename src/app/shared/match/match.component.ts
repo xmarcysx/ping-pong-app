@@ -13,6 +13,7 @@ export class MatchComponent {
   @Output() removeEventEmitter = new EventEmitter();
   @Input() match!: Match;
   @Input() kingOfTheDay = false;
+  @Input() isViewMode = false;
 
   getBackground() {
     if (this.kingOfTheDay) {

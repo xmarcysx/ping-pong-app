@@ -3,10 +3,10 @@
     <div class="title">Ranking</div>
   </div>
 
-  <div class="content py-3">
+  <div class="content d-flex flex-column justify-content-between py-3">
     <div class="row py-5">
       <div class="players-list">
-        @for (player of players; track $index) {
+        @for (player of playersList; track $index) {
         <div class="content">
           <div [className]="$index + 1 === 1 ? 'match-gold' : 'match-average'">
             <div class="player">
@@ -27,9 +27,7 @@
                 {{ player.username }}
               </div>
               <div class="result">
-                <div
-                  class="flex justify-content-center align-items-center gap-3"
-                >
+                <div class="flex justify-content-end align-items-center gap-3">
                   <div
                     class="flex justify-content-center align-items-center gap-1"
                   >
@@ -52,5 +50,13 @@
         }
       </div>
     </div>
+    @if (players.length > 5) {
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="players.length"
+    />
+    }
   </div>
 </div>

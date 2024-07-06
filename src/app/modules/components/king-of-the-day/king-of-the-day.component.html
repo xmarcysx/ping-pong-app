@@ -3,18 +3,24 @@
     <div class="title">Król dnia</div>
   </div>
 
-  <div class="content py-3">
-    <div class="row py-5">
-      <div class="col-lg-12 d-flex justify-content-center">
-        <app-form-submit-btn
-          (btnClicked)="addKingOfTheDay()"
-          title="Utwórz nowe wydarzenie"
-        ></app-form-submit-btn>
-      </div>
+  <div class="row py-5">
+    <div
+      class="col-lg-12 d-flex flex-column flex-md-row align-items-center gap-3 justify-content-center"
+    >
+      <app-form-submit-btn
+        (btnClicked)="goToKingOfTheDayHistory()"
+        title="Historia wydarzeń"
+      ></app-form-submit-btn>
+      <app-form-submit-btn
+        (btnClicked)="addKingOfTheDay()"
+        title="Utwórz wydarzenie"
+      ></app-form-submit-btn>
     </div>
+  </div>
+  <div class="content d-flex flex-column justify-content-between py-3">
     <div class="row py-5">
       <div class="players-list">
-        @for (player of players; track $index) {
+        @for (player of playersList; track $index) {
         <div class="content">
           <div [className]="$index + 1 === 1 ? 'match-gold' : 'match-average'">
             <div class="player">
@@ -23,6 +29,7 @@
               </div>
               <div class="player-logo">
                 <img
+                  class="cursor-pointer"
                   (click)="youDataPanel.toggle($event)"
                   [src]="
                     player.profileImg === undefined
@@ -80,5 +87,13 @@
         }
       </div>
     </div>
+    @if (players.length > 5) {
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="players.length"
+    />
+    }
   </div>
 </div>

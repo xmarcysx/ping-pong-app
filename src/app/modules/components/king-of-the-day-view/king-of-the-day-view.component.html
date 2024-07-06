@@ -1,0 +1,30 @@
+<div class="king-content">
+  <div class="content py-3">
+    <div class="row py-3">
+      <div class="match-list">
+        @for (match of matchesList; track $index) {
+        <app-match
+          [kingOfTheDay]="true"
+          [isViewMode]="isViewMode"
+          [match]="match"
+        ></app-match>
+        }@if (matches.length > 5) {
+        <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [first]="first"
+          [rows]="rows"
+          [totalRecords]="matches.length"
+        />
+        }
+        <div class="flex flex-column justify-content-center mt-3">
+          <div class="flex justify-content-center align-items-center gap-3">
+            <app-form-submit-btn
+              (btnClicked)="close()"
+              title="Zamknij"
+            ></app-form-submit-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

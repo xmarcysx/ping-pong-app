@@ -3,46 +3,46 @@
     <div class="title">Historia spotkań</div>
   </div>
 
-  <div class="content py-3">
-    <div class="my-3 w-100 flex justify-content-center">
-      <div class="dropdown w-50">
-        <p-dropdown
-          [options]="rivalList"
-          [(ngModel)]="rival"
-          (onChange)="rivalChanged()"
-          [showClear]="true"
-          emptyMessage="Brak przeciwników"
-          placeholder="Wybierz przeciwnika"
-        >
-          <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2">
-              <img
-                [src]="
-                  rival?.profileImg === undefined
-                    ? '../../../../assets/images/profile.png'
-                    : rival?.profileImg
-                "
-                class="image"
-              />
-              <div>{{ rival?.username }}</div>
-            </div>
-          </ng-template>
-          <ng-template let-rival pTemplate="item">
-            <div class="flex align-items-center gap-2">
-              <img
-                [src]="
-                  rival.profileImg === undefined
-                    ? '../../../../assets/images/profile.png'
-                    : rival.profileImg
-                "
-                class="image"
-              />
-              <div>{{ rival.username }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown>
-      </div>
+  <div class="my-3 w-100 flex justify-content-center">
+    <div class="dropdown w-50">
+      <p-dropdown
+        [options]="rivalList"
+        [(ngModel)]="rival"
+        (onChange)="rivalChanged()"
+        [showClear]="true"
+        emptyMessage="Brak przeciwników"
+        placeholder="Wybierz przeciwnika"
+      >
+        <ng-template pTemplate="selectedItem">
+          <div class="flex align-items-center gap-2">
+            <img
+              [src]="
+                rival?.profileImg === undefined
+                  ? '../../../../assets/images/profile.png'
+                  : rival?.profileImg
+              "
+              class="image"
+            />
+            <div>{{ rival?.username }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-rival pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <img
+              [src]="
+                rival.profileImg === undefined
+                  ? '../../../../assets/images/profile.png'
+                  : rival.profileImg
+              "
+              class="image"
+            />
+            <div>{{ rival.username }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
     </div>
+  </div>
+  <div class="content d-flex flex-column justify-content-between py-3">
     <div class="row py-5">
       <div class="match-list">
         @if (spinnerService.showInnerSpinner()) {
@@ -63,13 +63,6 @@
         </div>
         @for (match of matchesList; track $index) {
         <app-match [match]="match"></app-match>
-        } @if (matches.length > 5) {
-        <p-paginator
-          (onPageChange)="onPageChange($event)"
-          [first]="first"
-          [rows]="rows"
-          [totalRecords]="matches.length"
-        />
         } } @else if(!matches.length && rival) {
         <div class="d-flex justify-content-center align-items-center">
           <div class="font-weight-bold text-danger">Brak wyników</div>
@@ -77,5 +70,13 @@
         } }
       </div>
     </div>
+    @if (matches.length > 5) {
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="matches.length"
+    />
+    }
   </div>
 </div>

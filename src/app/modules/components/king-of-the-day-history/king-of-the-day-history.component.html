@@ -1,0 +1,30 @@
+<div class="king-content">
+  <div class="header">
+    <div class="title">Historia król dnia</div>
+  </div>
+
+  <div class="content d-flex flex-column justify-content-between py-3">
+    <div class="row py-5">
+      <div class="players-list">
+        @for (singleKingOfTheDayHistory of kingOfTheDayHistoryList; track
+        $index) {
+        <div class="content">
+          <app-king-of-the-day-winner
+            [viewMode]="true"
+            [player]="this.getWinner(singleKingOfTheDayHistory)"
+            [matches]="singleKingOfTheDayHistory"
+          ></app-king-of-the-day-winner>
+        </div>
+        }
+      </div>
+    </div>
+    @if (kingOfTheDayHistory.length > 5) {
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="kingOfTheDayHistory.length"
+    />
+    }
+  </div>
+</div>
